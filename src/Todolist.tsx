@@ -3,7 +3,7 @@ import React, {MouseEvent} from 'react';
 import {filterTasks} from "./App";
 
 export type TaskType = {
-	id: number
+	id: string
 	title: string
 	isDone: boolean
 }
@@ -12,7 +12,7 @@ type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskType>
 	filterTasks: (el:filterTasks) => void
-	removeTask: (id: number) => void
+	removeTask: (id: string) => void
 
 };
 export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsType) => {
