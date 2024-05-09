@@ -10,9 +10,10 @@ type TaskType={
 type TodolistPropsType = {
 	title:string
 	tasks: Array<TaskType>
+	filterTasks:()=>void
 
 };
-export const Todolist = ({title, tasks}: TodolistPropsType) => {
+export const Todolist = ({title, filterTasks, tasks}: TodolistPropsType) => {
 
 	const tasksListHandler = tasks.map(el=> {
 		return <li>
@@ -31,9 +32,9 @@ export const Todolist = ({title, tasks}: TodolistPropsType) => {
 
 				</ul>
 				<div className={"container-button"}>
-					<button>All</button>
-					<button>Active</button>
-					<button>Completed</button>
+					<button onClick={filterTasks}>All</button>
+					<button onClick={filterTasks}>Active</button>
+					<button onClick={filterTasks}>Completed</button>
 				</div>
 
 

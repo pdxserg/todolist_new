@@ -1,23 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 
+type filterTasks='all'|'active'|'comp'
+
 function App() {
-    const tasks =[
-        {id: 1, title: "HTML",isDone: true},
-        {id: 2, title: "CSS",isDone: true},
-        {id: 3, title: "REACT",isDone: false}
-    ]
-    const tasks2 =[
-        {id: 1, title: "MILK",isDone: true},
-        {id: 2, title: "TEA",isDone: true},
-        {id: 3, title: "COFFE",isDone: false}
-    ]
+    const [tasks, setTasks]= useState([
+            {id: 1, title: "HTML",isDone: true},
+            {id: 2, title: "CSS",isDone: true},
+            {id: 3, title: "REACT",isDone: false}
+        ]
+    )
+   const [filter, setFilter]=useState<filterTasks>("all")
+
+
+
+    const filterTasks= (()=>{
+        setTasks(filter)
+    })
+
+    let todolist = tasks
+    if(filter === 'active'){
+        const newFilterActive = todolist.map(el => el.isDone === true)
+    }if (filter === 'comp'){
+        const newFilterComp = todolist.map(el => el.isDone === false)
+    }
+
 
   return (
     <div className="App">
-        <Todolist title={"What to learn"} tasks={tasks}/>
-        <Todolist title={"What to buy"} tasks={tasks2}/>
+        <Todolist
+            title={"What to learn"}
+            tasks={tasks}
+            filterTasks={filterTasks}
+        />
 
     </div>
   );
