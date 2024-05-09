@@ -19,3 +19,10 @@
 .red{
   color: red;
 }
+.error{
+  border: red 2px solid;
+
+}
+.error-message{
+  color:red;
+}

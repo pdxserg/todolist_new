@@ -18,15 +18,25 @@ type TodolistPropsType = {
 };
 export const Todolist = ({title, filterTasks, addTask, changeStatus, removeTask, tasks}: TodolistPropsType) => {
 	const [newTask, setNewTask] = useState("")
+	const [error, setError] = useState<string |null> (null)
+
 	const onChangeHandler = (el: ChangeEvent<HTMLInputElement>) => {
 		setNewTask(el.currentTarget.value)
 	}
 	const setNewTaskHandler = () => {
-		addTask(newTask)
-		setNewTask("")
+		if( newTask.trim()==="" ){
+			return setError("Field is required")
+		}if( newTask.trim()==="xxx" ){
+			return setError("Field is required")
+		}
+			addTask(newTask.trim())
+			setNewTask("")
+
+
 	}
 	const onKeyHandler = (el: KeyboardEvent<HTMLInputElement>) => {
-		if (el.key === "Enter") {
+		setError(null)
+		if (el.key === "Enter" && newTask.trim().length>0 ) {
 			addTask(newTask.trim())
 			setNewTask("")
 		}
@@ -43,7 +53,7 @@ export const Todolist = ({title, filterTasks, addTask, changeStatus, removeTask,
 		}
 
 		return <li key={el.id}>
-			{el.title}<input type="checkbox"  onChange={checkBoxHandler} checked={el.isDone}/>
+			{el.title}<input type="checkbox"  onChange={checkBoxHandler} checked={el.isDone} />
 			<button onClick={removeTaskHandler}>x</button>
 		</li>
 	})
@@ -52,8 +62,9 @@ export const Todolist = ({title, filterTasks, addTask, changeStatus, removeTask,
 			<div className="container">
 				<h2>{title}</h2>
 				<div>
-					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}/>
+					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler} className={error ? "error": ""}/>
 					<button onClick={setNewTaskHandler}>+</button>
+					{error && <div className="error-message"> {error}</div>}
 
 				</div>
 				<ul>
