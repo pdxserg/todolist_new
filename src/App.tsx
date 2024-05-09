@@ -14,7 +14,10 @@ function App() {
     )
    const [filter, setFilter]=useState<filterTasks>("all")
 
-
+const addTask = (el:string)=>{
+        const newTask = {id: v1(), title: el, isDone: false}
+    setTasks([newTask, ...tasks])
+}
 const removeTask=(id: string)=>{
        const newTasks = tasks.filter(el => el.id !== id)
     setTasks(newTasks)
@@ -39,6 +42,7 @@ const removeTask=(id: string)=>{
             tasks={todolists}
             removeTask={removeTask}
             filterTasks={filterTasks}
+            addTask={addTask}
         />
 
     </div>

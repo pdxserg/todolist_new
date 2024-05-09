@@ -1,5 +1,5 @@
 // @flow
-import React, {MouseEvent} from 'react';
+import React, {ChangeEvent, MouseEvent, useState} from 'react';
 import {filterTasks} from "./App";
 
 export type TaskType = {
@@ -13,10 +13,17 @@ type TodolistPropsType = {
 	tasks: Array<TaskType>
 	filterTasks: (el:filterTasks) => void
 	removeTask: (id: string) => void
-
+	addTask:(el:string)=>void
 };
-export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsType) => {
-
+export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: TodolistPropsType) => {
+ const [newTask, setNewTask]=useState("")
+	const onChangeHandler= (el:ChangeEvent<HTMLInputElement> )=>{
+	 setNewTask(el.currentTarget.value)
+	}
+	const setNewTaskHandler=()=>{
+		addTask(newTask)
+		setNewTask("")
+	}
 
 	const tasksListHandler = tasks.map(el => {
 		const removeTaskHandler = () => {
@@ -32,8 +39,8 @@ export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsT
 		<div>
 			<div className="container">
 				<h2>{title}</h2>
-				<input type="text"/>
-				<button>+</button>
+				<input type="text" value={newTask} onChange={onChangeHandler}/>
+				<button onClick={setNewTaskHandler}>+</button>
 				<ul>
 					{tasks.length === 0
 						? <p> Task not exist</p>
