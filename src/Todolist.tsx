@@ -1,5 +1,5 @@
 // @flow
-import React, {ChangeEvent, MouseEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {filterTasks} from "./App";
 
 export type TaskType = {
@@ -24,6 +24,12 @@ export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: Todol
 		addTask(newTask)
 		setNewTask("")
 	}
+	const onKeyHandler=(el:KeyboardEvent<HTMLInputElement> )=>{
+	 if(el.key === "Enter" && newTask.length <0){
+		 addTask(newTask)
+		 setNewTask("")
+	 }
+	}
 
 	const tasksListHandler = tasks.map(el => {
 		const removeTaskHandler = () => {
@@ -39,7 +45,7 @@ export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: Todol
 		<div>
 			<div className="container">
 				<h2>{title}</h2>
-				<input type="text" value={newTask} onChange={onChangeHandler}/>
+				<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}/>
 				<button onClick={setNewTaskHandler}>+</button>
 				<ul>
 					{tasks.length === 0
