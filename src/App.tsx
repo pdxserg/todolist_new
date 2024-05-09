@@ -14,9 +14,13 @@ function App() {
    const [filter, setFilter]=useState<filterTasks>("all")
 
 
+const removeTask=(id: number)=>{
+       const newTasks = tasks.filter(el => el.id !== id)
+    setTasks(newTasks)
 
+}
     const filterTasks= (()=>{
-        setTasks(filter)
+       // setTasks(filter)
     })
 
     let todolist = tasks
@@ -32,6 +36,7 @@ function App() {
         <Todolist
             title={"What to learn"}
             tasks={tasks}
+            removeTask={removeTask}
             filterTasks={filterTasks}
         />
 

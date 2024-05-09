@@ -1,24 +1,30 @@
 // @flow
-import * as React from 'react';
+import React, {MouseEvent} from 'react';
 
-type TaskType={
-	id:number
-	title:string
-	isDone:boolean
+type TaskType = {
+	id: number
+	title: string
+	isDone: boolean
 }
 
 type TodolistPropsType = {
-	title:string
+	title: string
 	tasks: Array<TaskType>
-	filterTasks:()=>void
+	filterTasks: () => void
+	removeTask: (id: number) => void
 
 };
-export const Todolist = ({title, filterTasks, tasks}: TodolistPropsType) => {
+export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsType) => {
 
-	const tasksListHandler = tasks.map(el=> {
-		return <li>
+
+	const tasksListHandler = tasks.map(el => {
+		const removeTaskHandler = (e: MouseEvent<HTMLButtonElement>) => {
+			removeTask(el.id)
+		}
+
+		return <li key={el.id}>
 			{el.title}<input type="checkbox" checked={el.isDone}/>
-			<button>x</button>
+			<button onClick={removeTaskHandler}>x</button>
 		</li>
 	})
 	return (
@@ -28,7 +34,11 @@ export const Todolist = ({title, filterTasks, tasks}: TodolistPropsType) => {
 				<input type="text"/>
 				<button>+</button>
 				<ul>
-					{tasksListHandler}
+					{tasks.length === 0
+						? <p> Task not exist</p>
+						: tasksListHandler
+					}
+
 
 				</ul>
 				<div className={"container-button"}>
