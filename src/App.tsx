@@ -23,11 +23,11 @@ const removeTask=(id: number)=>{
         setFilter(el)
     })
 
-    let todolist = tasks
+    let todolists = tasks
     if(filter === 'active'){
-        todolist = tasks.filter(el => el.isDone === true)
+        todolists = tasks.filter(el => el.isDone === false)
     }if (filter === 'comp'){
-        todolist = tasks.filter(el => el.isDone === false)
+        todolists = tasks.filter(el => el.isDone === true)
     }
 
 
@@ -35,7 +35,7 @@ const removeTask=(id: number)=>{
     <div className="App">
         <Todolist
             title={"What to learn"}
-            tasks={todolist}
+            tasks={todolists}
             removeTask={removeTask}
             filterTasks={filterTasks}
         />

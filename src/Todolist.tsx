@@ -1,5 +1,6 @@
 // @flow
 import React, {MouseEvent} from 'react';
+import {filterTasks} from "./App";
 
 export type TaskType = {
 	id: number
@@ -10,7 +11,7 @@ export type TaskType = {
 type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskType>
-	filterTasks: () => void
+	filterTasks: (el:filterTasks) => void
 	removeTask: (id: number) => void
 
 };
@@ -42,9 +43,9 @@ export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsT
 
 				</ul>
 				<div className={"container-button"}>
-					<button onClick={filterTasks}>All</button>
-					<button onClick={filterTasks}>Active</button>
-					<button onClick={filterTasks}>Completed</button>
+					<button onClick={()=>filterTasks('all')}>All</button>
+					<button onClick={()=>filterTasks('active')}>Active</button>
+					<button onClick={()=>filterTasks('comp')}>Completed</button>
 				</div>
 
 
