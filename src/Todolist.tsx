@@ -11,33 +11,39 @@ export type TaskType = {
 type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskType>
-	filterTasks: (el:filterTasks) => void
+	filterTasks: (el: filterTasks) => void
 	removeTask: (id: string) => void
-	addTask:(el:string)=>void
+	addTask: (el: string) => void
+	changeStatus:(taskId:string, isDone: boolean)=>void
 };
-export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: TodolistPropsType) => {
- const [newTask, setNewTask]=useState("")
-	const onChangeHandler= (el:ChangeEvent<HTMLInputElement> )=>{
-	 setNewTask(el.currentTarget.value)
+export const Todolist = ({title, filterTasks, addTask, changeStatus, removeTask, tasks}: TodolistPropsType) => {
+	const [newTask, setNewTask] = useState("")
+	const onChangeHandler = (el: ChangeEvent<HTMLInputElement>) => {
+		setNewTask(el.currentTarget.value)
 	}
-	const setNewTaskHandler=()=>{
+	const setNewTaskHandler = () => {
 		addTask(newTask)
 		setNewTask("")
 	}
-	const onKeyHandler=(el:KeyboardEvent<HTMLInputElement> )=>{
-	 if(el.key === "Enter" && newTask.length <0){
-		 addTask(newTask)
-		 setNewTask("")
-	 }
+	const onKeyHandler = (el: KeyboardEvent<HTMLInputElement>) => {
+		if (el.key === "Enter") {
+			addTask(newTask.trim())
+			setNewTask("")
+		}
 	}
+
+
 
 	const tasksListHandler = tasks.map(el => {
 		const removeTaskHandler = () => {
 			removeTask(el.id)
 		}
+		const checkBoxHandler = (e: ChangeEvent<HTMLInputElement>) => {
+			changeStatus( el.id, e.currentTarget.checked)
+		}
 
 		return <li key={el.id}>
-			{el.title}<input type="checkbox" checked={el.isDone}/>
+			{el.title}<input type="checkbox"  onChange={checkBoxHandler} checked={el.isDone}/>
 			<button onClick={removeTaskHandler}>x</button>
 		</li>
 	})
@@ -45,8 +51,11 @@ export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: Todol
 		<div>
 			<div className="container">
 				<h2>{title}</h2>
-				<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}/>
-				<button onClick={setNewTaskHandler}>+</button>
+				<div>
+					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}/>
+					<button onClick={setNewTaskHandler}>+</button>
+
+				</div>
 				<ul>
 					{tasks.length === 0
 						? <p> Task not exist</p>
@@ -56,9 +65,9 @@ export const Todolist = ({title, filterTasks, addTask, removeTask, tasks}: Todol
 
 				</ul>
 				<div className={"container-button"}>
-					<button onClick={()=>filterTasks('all')}>All</button>
-					<button onClick={()=>filterTasks('active')}>Active</button>
-					<button onClick={()=>filterTasks('comp')}>Completed</button>
+					<button onClick={() => filterTasks('all')}>All</button>
+					<button onClick={() => filterTasks('active')}>Active</button>
+					<button onClick={() => filterTasks('comp')}>Completed</button>
 				</div>
 
 
