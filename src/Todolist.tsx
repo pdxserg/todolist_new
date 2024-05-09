@@ -1,7 +1,7 @@
 // @flow
 import React, {MouseEvent} from 'react';
 
-type TaskType = {
+export type TaskType = {
 	id: number
 	title: string
 	isDone: boolean
@@ -18,7 +18,7 @@ export const Todolist = ({title, filterTasks, removeTask, tasks}: TodolistPropsT
 
 
 	const tasksListHandler = tasks.map(el => {
-		const removeTaskHandler = (e: MouseEvent<HTMLButtonElement>) => {
+		const removeTaskHandler = () => {
 			removeTask(el.id)
 		}
 
