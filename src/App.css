@@ -15,6 +15,12 @@
 
 .container-button{
   margin-bottom: 20px;
+
+}
+button:active {
+  background-color: #7ac2b8;
+
+
 }
 .red{
   color: red;
@@ -25,4 +31,11 @@
 }
 .error-message{
   color:red;
+}
+.activ-filter{
+  background-color: #8dfff0;
+
+}
+.opasity{
+  opacity: 30%;
 }
