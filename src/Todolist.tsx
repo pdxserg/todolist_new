@@ -16,9 +16,10 @@ type TodolistPropsType = {
 	addTask: (todolistID:string, el: string) => void
 	changeStatus: (todolistID: string, taskId: string, isDone: boolean) => void
 	filter: filterTasks
+	removeTodolist:(todolistID:string) => void
 	todolistID:string
 };
-export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus, filter, removeTask, tasks}: TodolistPropsType) => {
+export const Todolist = ({title, todolistID, removeTodolist, filterTasks, addTask, changeStatus, filter, removeTask, tasks}: TodolistPropsType) => {
 	const [newTask, setNewTask] = useState("")
 	const [error, setError] = useState<string | null>(null)
 
@@ -45,7 +46,9 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 		}
 	}
 
-
+	const removeTodolistHandler=()=>{
+		removeTodolist(todolistID)
+	}
 	const tasksListHandler = tasks.map(el => {
 		const removeTaskHandler = () => {
 			removeTask(todolistID ,el.id)
@@ -62,6 +65,7 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 	return (
 		<div>
 			<div className="container">
+				<button onClick={removeTodolistHandler}>x</button>
 				<h2>{title}</h2>
 				<div>
 					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}
@@ -80,13 +84,13 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 				</ul>
 				<div className={"container-button"}>
 					<button className={filter === 'all' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID,'all')}>All
+					        onClick={() => filterTasks(todolistID, 'all')}>All
 					</button>
 					<button className={filter === 'active' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID,'active')}>Active
+					        onClick={() => filterTasks(todolistID, 'active')}>Active
 					</button>
 					<button className={filter === 'comp' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID,'comp')}>Completed
+					        onClick={() => filterTasks(todolistID, 'comp')}>Completed
 					</button>
 				</div>
 

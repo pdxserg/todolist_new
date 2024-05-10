@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {logDOM} from "@testing-library/react";
 
 export type filterTasks = 'all' | 'active' | 'comp'
 export type TodolistsPropsType = {
@@ -30,6 +31,7 @@ function App() {
 				{id: v1(), title: "sugar", isDone: false}]
 		}
 	)
+	console.log(tasksObj)
 	const changeStatus = (todolistID: string,taskId: string, isDone: boolean) => {
 		let tasks = tasksObj[todolistID]
 		const task = tasks.find(el => el.id === taskId)
@@ -59,6 +61,14 @@ function App() {
 
 		// 	const newTask = {id: v1(), title: el, isDone: false}
 		// 	setTasks([newTask, ...tasks])
+	}
+
+
+	const removeTodolist=(todolistID: string)=>{
+		const newTodolist = todolists.filter(el=>el.id !==todolistID)
+		delete tasksObj[todolistID]
+		setTodolists(newTodolist)
+
 	}
 	const removeTask = (todolistID: string, id: string) => {
 		// in one row!!!!
@@ -101,6 +111,7 @@ function App() {
 						changeStatus={changeStatus}
 						filter={el.filter}
 						todolistID={el.id}
+						removeTodolist={removeTodolist}
 					/>
 				)
 			})}
