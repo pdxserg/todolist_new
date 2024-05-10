@@ -13,7 +13,7 @@ type TodolistPropsType = {
 	tasks: Array<TaskType>
 	filterTasks: (todolistID:string, el: filterTasks) => void
 	removeTask: (todolistID:string,id: string) => void
-	addTask: (el: string) => void
+	addTask: (todolistID:string, el: string) => void
 	changeStatus: (taskId: string, isDone: boolean) => void
 	filter: filterTasks
 	todolistID:string
@@ -32,7 +32,7 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 		if (newTask.trim() === "xxx") {
 			return setError("Field is required")
 		}
-		addTask(newTask.trim())
+		addTask(todolistID,newTask.trim())
 		setNewTask("")
 
 
@@ -40,7 +40,7 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 	const onKeyHandler = (el: KeyboardEvent<HTMLInputElement>) => {
 		setError(null)
 		if (el.key === "Enter" && newTask.trim().length > 0) {
-			addTask(newTask.trim())
+			addTask(todolistID,newTask.trim())
 			setNewTask("")
 		}
 	}

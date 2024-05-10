@@ -17,7 +17,7 @@ function App() {
 
 	const [todolists, setTodolists] = useState<TodolistsPropsType[]>([
 		{id: todolist1, title: "What to learn", filter: "all"},
-		{id: todolist2, title: "What to bay", filter: "comp"}
+		{id: todolist2, title: "What to bay", filter: "all"}
 	])
 	const [tasksObj, setTasksObj] = useState({
 			[todolist1]: [
@@ -40,16 +40,23 @@ function App() {
 	}
 
 
-	const addTask = (el: string) => {
+	const addTask = (todolistID: string, el: string) => {
+		const task = {id: v1(), title: el, isDone: false}
+		let tasks = tasksObj[todolistID]
+		let newTasks =[task, ...tasks]
+		tasksObj[todolistID]=newTasks
+		setTasksObj({...tasksObj})
+
 		// 	const newTask = {id: v1(), title: el, isDone: false}
 		// 	setTasks([newTask, ...tasks])
 	}
-	const removeTask = (todolistID:string, id: string) => {
+	const removeTask = (todolistID: string, id: string) => {
 		// in one row!!!!
 		// setTasksObj({...tasksObj,[todolistID]:tasksObj[todolistID].filter(el => el.id !== id)})
-		let task = tasksObj[todolistID]
-		 const newTasks = task.filter(el => el.id !== id)
-		 setTasksObj({...tasksObj,[todolistID]:newTasks})
+		let tasks = tasksObj[todolistID]
+		const newTasks = tasks.filter(el => el.id !== id)
+		tasksObj[todolistID]=newTasks
+		setTasksObj({...tasksObj})
 
 	}
 
