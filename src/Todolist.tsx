@@ -60,7 +60,7 @@ export const Todolist = ({title, todolistID, removeTodolist, filterTasks, addTas
 
 		return <li className={el.isDone ?"opasity":''} key={el.id}>
 			{el.title}<input type="checkbox" onChange={checkBoxHandler} checked={el.isDone}/>
-			<button onClick={removeTaskHandler}>x</button>
+			<Button title={"x"} onClick={removeTaskHandler}/>
 		</li>
 	})
 	return (
@@ -72,7 +72,7 @@ export const Todolist = ({title, todolistID, removeTodolist, filterTasks, addTas
 				<div>
 					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}
 					       className={error ? "error" : ""}/>
-					<button onClick={setNewTaskHandler}>+</button>
+					<Button title={"+"} onClick={setNewTaskHandler}/>
 					{error && <div className="error-message"> {error}</div>}
 
 				</div>
@@ -85,15 +85,15 @@ export const Todolist = ({title, todolistID, removeTodolist, filterTasks, addTas
 
 				</ul>
 				<div className={"container-button"}>
-					<button className={filter === 'all' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID, 'all')}>All
-					</button>
-					<button className={filter === 'active' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID, 'active')}>Active
-					</button>
-					<button className={filter === 'comp' ? "activ-filter" : ""}
-					        onClick={() => filterTasks(todolistID, 'comp')}>Completed
-					</button>
+					<Button title={"All"}
+					        className={filter === 'all' ? "activ-filter" : ""}
+					        onClick={() => filterTasks(todolistID, 'all')}/>
+					<Button title={"Active"}
+					        className={filter === 'active' ? "activ-filter" : ""}
+					        onClick={() => filterTasks(todolistID, 'active')}/>
+					<Button title={"Completed"}
+					        className={filter === 'comp' ? "activ-filter" : ""}
+					        onClick={() => filterTasks(todolistID, 'comp')}/>
 				</div>
 
 
