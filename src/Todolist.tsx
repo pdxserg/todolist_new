@@ -1,6 +1,7 @@
 // @flow
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {filterTasks} from "./App";
+import {Button} from "./components/Button";
 
 export type TaskType = {
 	id: string
@@ -65,7 +66,8 @@ export const Todolist = ({title, todolistID, removeTodolist, filterTasks, addTas
 	return (
 		<div>
 			<div className="container">
-				<button onClick={removeTodolistHandler}>x</button>
+				<Button title={"x"} onClick={removeTodolistHandler}/>
+
 				<h2>{title}</h2>
 				<div>
 					<input type="text" value={newTask} onChange={onChangeHandler} onKeyUp={onKeyHandler}
