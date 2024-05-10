@@ -7,10 +7,11 @@
   justify-content: center;
 }
 .container{
-  border: 2px solid blueviolet;
+  border: 2px solid #31e22b;
   border-radius: 15px;
   margin-bottom: 20px;
   margin-right: 20px;
+  min-height: 200px;
 }
 
 .container-button{
@@ -33,7 +34,7 @@ button:active {
   color:red;
 }
 .activ-filter{
-  background-color: #8dfff0;
+  background-color: #4fff54;
 
 }
 .opasity{

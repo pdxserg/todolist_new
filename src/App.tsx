@@ -55,6 +55,14 @@ function App() {
 				addTask={addTask}
 				changeStatus={changeStatus}
 				filter={filter}
+			/><Todolist
+				title={"What to learn"}
+				tasks={todolists}
+				removeTask={removeTask}
+				filterTasks={filterTasks}
+				addTask={addTask}
+				changeStatus={changeStatus}
+				filter={filter}
 			/>
 
 		</div>
