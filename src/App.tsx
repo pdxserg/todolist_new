@@ -37,8 +37,11 @@ function App() {
 
 	}
 	const filterTasks = ((todolistID:string, el: filterTasks) => {
-
-
+const todolist = todolists.find(el=> el.id === todolistID)
+		if(todolist){
+			todolist.filter=el
+		}
+setTodolists([...todolists])
 	})
 
 
