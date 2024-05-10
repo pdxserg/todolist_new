@@ -4,7 +4,11 @@ import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 export type filterTasks = 'all' | 'active' | 'comp'
-
+export type TodolistsPropsType= {
+	id: string,
+	title: string,
+	filter:filterTasks
+}
 function App() {
 	const [tasks, setTasks] = useState([
 			{id: v1(), title: "HTML", isDone: true},
@@ -36,34 +40,35 @@ function App() {
 		setFilter(el)
 	})
 
-	let todolists = tasks
+	let todolistsFilter = tasks
 	if (filter === 'active') {
-		todolists = tasks.filter(el => el.isDone === false)
+		todolistsFilter = tasks.filter(el => el.isDone === false)
 	}
 	if (filter === 'comp') {
-		todolists = tasks.filter(el => el.isDone === true)
+		todolistsFilter = tasks.filter(el => el.isDone === true)
 	}
+const todolists: TodolistsPropsType[] = [
+	{id: v1(), title: "What to learn", filter:"all"},
+	{id: v1(), title: "What to bay", filter:"comp"}
+]
 
 
 	return (
 		<div className="App">
-			<Todolist
-				title={"What to learn"}
-				tasks={todolists}
-				removeTask={removeTask}
-				filterTasks={filterTasks}
-				addTask={addTask}
-				changeStatus={changeStatus}
-				filter={filter}
-			/><Todolist
-				title={"What to learn"}
-				tasks={todolists}
-				removeTask={removeTask}
-				filterTasks={filterTasks}
-				addTask={addTask}
-				changeStatus={changeStatus}
-				filter={filter}
-			/>
+			{todolists.map(el =>{
+				return(
+					<Todolist
+						title={el.title}
+						tasks={todolistsFilter}
+						removeTask={removeTask}
+						filterTasks={filterTasks}
+						addTask={addTask}
+						changeStatus={changeStatus}
+						filter={el.filter}
+					/>
+				)
+			})}
+
 
 		</div>
 	);
