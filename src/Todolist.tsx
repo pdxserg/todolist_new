@@ -11,13 +11,14 @@ export type TaskType = {
 type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskType>
-	filterTasks: (el: filterTasks) => void
+	filterTasks: (todolistID:string, el: filterTasks) => void
 	removeTask: (id: string) => void
 	addTask: (el: string) => void
 	changeStatus: (taskId: string, isDone: boolean) => void
 	filter: filterTasks
+	todolistID:string
 };
-export const Todolist = ({title, filterTasks, addTask, changeStatus, filter, removeTask, tasks}: TodolistPropsType) => {
+export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus, filter, removeTask, tasks}: TodolistPropsType) => {
 	const [newTask, setNewTask] = useState("")
 	const [error, setError] = useState<string | null>(null)
 
@@ -79,13 +80,13 @@ export const Todolist = ({title, filterTasks, addTask, changeStatus, filter, rem
 				</ul>
 				<div className={"container-button"}>
 					<button className={filter === 'all' ? "activ-filter" : ""}
-					        onClick={() => filterTasks('all')}>All
+					        onClick={() => filterTasks(todolistID,'all')}>All
 					</button>
 					<button className={filter === 'active' ? "activ-filter" : ""}
-					        onClick={() => filterTasks('active')}>Active
+					        onClick={() => filterTasks(todolistID,'active')}>Active
 					</button>
 					<button className={filter === 'comp' ? "activ-filter" : ""}
-					        onClick={() => filterTasks('comp')}>Completed
+					        onClick={() => filterTasks(todolistID,'comp')}>Completed
 					</button>
 				</div>
 
