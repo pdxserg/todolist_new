@@ -30,7 +30,14 @@ function App() {
 				{id: v1(), title: "sugar", isDone: false}]
 		}
 	)
-	const changeStatus = (taskId: string, isDone: boolean) => {
+	const changeStatus = (todolistID: string,taskId: string, isDone: boolean) => {
+		let tasks = tasksObj[todolistID]
+		const task = tasks.find(el => el.id === taskId)
+		if (task) {
+			 	task.isDone = isDone
+			setTasksObj({...tasksObj})
+		}
+
 		// const task = tasks.find(el => el.id === taskId)
 		// if (task) {
 		// 	task.isDone = isDone
@@ -41,6 +48,9 @@ function App() {
 
 
 	const addTask = (todolistID: string, el: string) => {
+		// tasksObj[todolistID]=[{id: v1(), title: el, isDone: false}, ...tasksObj[todolistID]]
+		// setTasksObj({...tasksObj})
+
 		const task = {id: v1(), title: el, isDone: false}
 		let tasks = tasksObj[todolistID]
 		let newTasks =[task, ...tasks]

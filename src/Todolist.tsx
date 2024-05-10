@@ -14,7 +14,7 @@ type TodolistPropsType = {
 	filterTasks: (todolistID:string, el: filterTasks) => void
 	removeTask: (todolistID:string,id: string) => void
 	addTask: (todolistID:string, el: string) => void
-	changeStatus: (taskId: string, isDone: boolean) => void
+	changeStatus: (todolistID: string, taskId: string, isDone: boolean) => void
 	filter: filterTasks
 	todolistID:string
 };
@@ -51,7 +51,7 @@ export const Todolist = ({title, todolistID, filterTasks, addTask, changeStatus,
 			removeTask(todolistID ,el.id)
 		}
 		const checkBoxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-			changeStatus(el.id, e.currentTarget.checked)
+			changeStatus( todolistID,el.id, e.currentTarget.checked)
 		}
 
 		return <li className={el.isDone ?"opasity":''} key={el.id}>
