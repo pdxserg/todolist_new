@@ -45,6 +45,8 @@ function App() {
 		// 	setTasks([newTask, ...tasks])
 	}
 	const removeTask = (todolistID:string, id: string) => {
+		// in one row!!!!
+		// setTasksObj({...tasksObj,[todolistID]:tasksObj[todolistID].filter(el => el.id !== id)})
 		let task = tasksObj[todolistID]
 		 const newTasks = task.filter(el => el.id !== id)
 		 setTasksObj({...tasksObj,[todolistID]:newTasks})
