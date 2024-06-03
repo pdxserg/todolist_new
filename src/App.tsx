@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Todolist} from "./Todolist";
 
 
@@ -8,14 +8,17 @@ import {Todolist} from "./Todolist";
 	isDone: boolean
 }
  export const App = () => {
- 	const tasks:Array<TaskPropseType> = [
-		{id: "1", title: "CSS", isDone: true},
-		{id: "2", title: "JS", isDone: true},
-		{id: "3", title: "React", isDone: false},
-	]
+ 	const [tasks,setTasks]=useState<Array<TaskPropseType>>([
+			 {id: "1", title: "CSS", isDone: true},
+			 {id: "2", title: "JS", isDone: true},
+			 {id: "3", title: "React", isDone: false},
+		 ]
+
+	 )
 
 const removeTask =(taskId:string)=>{
-
+const newTasks = tasks.filter(f=>f.id !== taskId)
+	setTasks(newTasks)
 }
 
 	return (
