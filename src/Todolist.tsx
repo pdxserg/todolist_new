@@ -11,8 +11,9 @@ type TodolistPropsType = {
 
 }
 export const Todolist = ({title, tasks, removeTask, }: TodolistPropsType) => {
-	const [filter, setFilter] = useState<FilterValue>("ALL")
 
+
+	const [filter, setFilter] = useState<FilterValue>("ALL")
 	if (filter === "ACTIVE") {
 		tasks = tasks.filter(f => f.isDone === true)
 		}

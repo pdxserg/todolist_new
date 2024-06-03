@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Todolist} from "./Todolist";
+import {v1} from "uuid";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 export  type TaskPropseType = {
@@ -9,9 +10,9 @@ export  type TaskPropseType = {
 }
 export const App = () => {
 	const [tasks, setTasks] = useState<Array<TaskPropseType>>([
-		{id: "1", title: "CSS", isDone: true},
-		{id: "2", title: "JS", isDone: true},
-		{id: "3", title: "React", isDone: false},
+		{id: v1(), title: "CSS", isDone: true},
+		{id: v1(), title: "JS", isDone: true},
+		{id: v1(), title: "React", isDone: false},
 	])
 	// const [filter, setFilter] = useState<FilterValue>("ALL")
 	// let tasksForTodolist = tasks
