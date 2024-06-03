@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Todolist} from "./Todolist";
 
-type FilteredTask = "ALL" | "ACTIVE"| "COMPLITED"
+export type FilteredTask = "ALL" | "ACTIVE" | "COMPLITED"
 export  type TaskPropseType = {
 	id: string
 	title: string
@@ -13,7 +13,7 @@ export const App = () => {
 		{id: "2", title: "JS", isDone: true},
 		{id: "3", title: "React", isDone: false},
 	])
-	const [filter, setFilter] = useState("ALL")
+	const [filter, setFilter] = useState<FilteredTask>("ALL")
 	let filteredTasks = tasks
 	if (filter === "ACTIVE") {
 		filteredTasks = filteredTasks.filter(f => f.isDone === true)
@@ -21,9 +21,9 @@ export const App = () => {
 	if (filter === "COMPLITED") {
 		filteredTasks = filteredTasks.filter(f => f.isDone === false)
 	}
-const filterTasks =(filter:string)=>{
-	setFilter(filter)
-}
+	const filterTasks = (filter: FilteredTask) => {
+		setFilter(filter)
+	}
 
 	const removeTask = (taskId: string) => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
