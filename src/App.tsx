@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Todolist} from "./Todolist";
 
-export type FilteredTask = "ALL" | "ACTIVE" | "COMPLITED"
+export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 export  type TaskPropseType = {
 	id: string
 	title: string
@@ -13,17 +13,17 @@ export const App = () => {
 		{id: "2", title: "JS", isDone: true},
 		{id: "3", title: "React", isDone: false},
 	])
-	const [filter, setFilter] = useState<FilteredTask>("ALL")
-	let filteredTasks = tasks
-	if (filter === "ACTIVE") {
-		filteredTasks = filteredTasks.filter(f => f.isDone === true)
-	}
-	if (filter === "COMPLITED") {
-		filteredTasks = filteredTasks.filter(f => f.isDone === false)
-	}
-	const filterTasks = (filter: FilteredTask) => {
-		setFilter(filter)
-	}
+	// const [filter, setFilter] = useState<FilterValue>("ALL")
+	// let tasksForTodolist = tasks
+	// if (filter === "ACTIVE") {
+	// 	tasksForTodolist = tasksForTodolist.filter(f => f.isDone === true)
+	// }
+	// if (filter === "COMPLITED") {
+	// 	tasksForTodolist = tasksForTodolist.filter(f => f.isDone === false)
+	// }
+	// const filterTasks = (filter: FilterValue) => {
+	// 	setFilter(filter)
+	// }
 
 	const removeTask = (taskId: string) => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
@@ -34,9 +34,9 @@ export const App = () => {
 		<div className="app">
 			<Todolist
 				title={"What  to learn"}
-				tasks={filteredTasks}
+				tasks={tasks}
 				removeTask={removeTask}
-				filterTasks={filterTasks}
+				// filterTasks={filterTasks}
 			/>
 		</div>
 	);

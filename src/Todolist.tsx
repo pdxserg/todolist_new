@@ -1,5 +1,5 @@
-import React from 'react';
-import {FilteredTask, TaskPropseType} from "./App";
+import React, {useState} from 'react';
+import {FilterValue, TaskPropseType} from "./App";
 import {Button} from "./Button";
 
 
@@ -7,10 +7,21 @@ type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskPropseType>
 	removeTask: (taskId: string) => void
-	filterTasks:(filter:FilteredTask)=>void
+	// filterTasks:(filter:FilterValue)=>void
 
 }
-export const Todolist = ({title, tasks, removeTask, filterTasks}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask, }: TodolistPropsType) => {
+	const [filter, setFilter] = useState<FilterValue>("ALL")
+
+	if (filter === "ACTIVE") {
+		tasks = tasks.filter(f => f.isDone === true)
+		}
+		if (filter === "COMPLITED") {
+			tasks = tasks.filter(f => f.isDone === false)
+		}
+		const filterTasks = (filter: FilterValue) => {
+			setFilter(filter)
+		}
 	return (
 		<div>
 			<h1>{title}</h1>
@@ -36,7 +47,6 @@ export const Todolist = ({title, tasks, removeTask, filterTasks}: TodolistPropsT
 				<Button title={"All"} onClick={()=>filterTasks("ALL")}/>
 				<Button title={"Active"} onClick={()=>filterTasks("ACTIVE")}/>
 				<Button title={"Completed"} onClick={()=>filterTasks("COMPLITED")}/>
-
 			</div>
 
 		</div>
