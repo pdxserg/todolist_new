@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {FilterValue, TaskPropseType} from "./App";
 import {Button} from "./Button";
 
@@ -8,11 +8,12 @@ type TodolistPropsType = {
 	tasks: Array<TaskPropseType>
 	removeTask: (taskId: string) => void
 	// filterTasks:(filter:FilterValue)=>void
+	addTask:(title: string)=>void
 
 }
-export const Todolist = ({title, tasks, removeTask, }: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask,addTask }: TodolistPropsType) => {
 
-
+	const [newTask, setNewtask]=useState("")
 	const [filter, setFilter] = useState<FilterValue>("ALL")
 	if (filter === "ACTIVE") {
 		tasks = tasks.filter(f => f.isDone === true)
@@ -23,11 +24,18 @@ export const Todolist = ({title, tasks, removeTask, }: TodolistPropsType) => {
 		const filterTasks = (filter: FilterValue) => {
 			setFilter(filter)
 		}
+	const onchangeHandler=(event: ChangeEvent<HTMLInputElement>)=>{
+			setNewtask(event.currentTarget.value)
+
+	}
+		const addTaskHandler=()=>{
+			 addTask(newTask)
+		}
 	return (
 		<div>
 			<h1>{title}</h1>
-			<input type="text"/>
-			<button>+</button>
+			<input type="text" value={newTask} onChange={onchangeHandler}/>
+			<button onClick={addTaskHandler}>+</button>
 			<ul>
 				{tasks.length === 0
 					? <p> Nothing here </p>

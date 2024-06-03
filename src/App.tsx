@@ -30,6 +30,10 @@ export const App = () => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
 		setTasks(newTasks)
 	}
+	const addTask=(title:string)=>{
+		const newTask ={id: v1(), title:title, isDone: false}
+		setTasks([...tasks,newTask])
+	}
 
 	return (
 		<div className="app">
@@ -38,6 +42,7 @@ export const App = () => {
 				tasks={tasks}
 				removeTask={removeTask}
 				// filterTasks={filterTasks}
+				addTask={addTask}
 			/>
 		</div>
 	);
