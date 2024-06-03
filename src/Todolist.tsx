@@ -8,7 +8,7 @@ type TodolistPropsType={
 	removeTask:(taskId:string)=>void
 
 }
- export const Todolist = ({title,tasks  }:TodolistPropsType) => {
+ export const Todolist = ({title,tasks,removeTask  }:TodolistPropsType) => {
 	return (
 		<div>
 			<h1>{title}</h1>
@@ -20,7 +20,7 @@ type TodolistPropsType={
 					return <li key={task.id}>
 						<input type="checkbox" checked={task.isDone}/>
 						<span> {task.title} </span>
-						<button onClick={removeTask(task.id)}>x</button>
+						<button onClick={()=>removeTask(task.id)}>x</button>
 					</li>
 				})}
 

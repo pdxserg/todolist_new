@@ -14,7 +14,7 @@ import {Todolist} from "./Todolist";
 		{id: "3", title: "React", isDone: false},
 	]
 
-const removeTask =()=>{
+const removeTask =(taskId:string)=>{
 
 }
 
