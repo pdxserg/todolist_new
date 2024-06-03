@@ -47,7 +47,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 	}
 
 	return (
-		<div>
+		<div className={'todolist'}>
 			<h1>{title}</h1>
 			<div>
 				<input
@@ -80,7 +80,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 
 
 			</ul>
-			<div>
+			<div >
 				<Button title={"All"}
 				        onClick={() => filterTasks("ALL")}
 				        className={filter === "ALL" ? 'active-filter' : ""}/>
