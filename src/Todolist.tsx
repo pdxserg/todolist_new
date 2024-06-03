@@ -49,7 +49,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 			<h1>{title}</h1>
 			<div>
 				<input
-					className={""}
+					className={error ?"error": ""}
 					type="text"
 					value={newTask}
 					onChange={onchangeHandler}
