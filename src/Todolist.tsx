@@ -24,8 +24,7 @@ export const Todolist = ({title, tasks, removeTask, filterTasks}: TodolistPropsT
 						return <li key={task.id}>
 							<input type="checkbox" checked={task.isDone}/>
 							<span> {task.title} </span>
-							<Button onClick={() => removeTask(task.id)}
-							title={"X"}/>
+							<Button onClick={() => removeTask(task.id)} title={"X"}/>
 
 						</li>
 					})
@@ -34,9 +33,10 @@ export const Todolist = ({title, tasks, removeTask, filterTasks}: TodolistPropsT
 
 			</ul>
 			<div>
-				<button onClick={()=>filterTasks("ALL")}>All</button>
-				<button onClick={()=>filterTasks("ACTIVE")}>Active</button>
-				<button onClick={()=>filterTasks("COMPLITED")}>Completed</button>
+				<Button title={"All"} onClick={()=>filterTasks("ALL")}/>
+				<Button title={"Active"} onClick={()=>filterTasks("ACTIVE")}/>
+				<Button title={"Completed"} onClick={()=>filterTasks("COMPLITED")}/>
+
 			</div>
 
 		</div>
