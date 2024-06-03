@@ -9,7 +9,7 @@ type TodolistPropsType = {
 	removeTask: (taskId: string) => void
 	// filterTasks:(filter:FilterValue)=>void
 	addTask:(title: string)=>void
-	changeStatus:(isDone: boolean)=>void
+	changeStatus:(id: string, isDone: boolean)=>void
 
 }
 export const Todolist = ({title, tasks, removeTask,addTask, changeStatus }: TodolistPropsType) => {
@@ -49,7 +49,7 @@ export const Todolist = ({title, tasks, removeTask,addTask, changeStatus }: Todo
 					? <p> Nothing here </p>
 					: tasks.map(task => {
 						const changeTaskStatusHendler=(e:ChangeEvent<HTMLInputElement>)=>{
-						changeStatus(e.currentTarget.checked)
+						changeStatus(task.id, e.currentTarget.checked)
 						}
 						return <li key={task.id}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>

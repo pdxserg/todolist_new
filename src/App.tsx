@@ -30,12 +30,18 @@ export const App = () => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
 		setTasks(newTasks)
 	}
-	const addTask=(title:string)=>{
-		const newTask ={id: v1(), title:title, isDone: false}
-		setTasks([...tasks,newTask])
+	const addTask = (title: string) => {
+		const newTask = {id: v1(), title: title, isDone: false}
+		setTasks([...tasks, newTask])
 	}
 
-	const changeStatus=(isDone: boolean)=>{}
+	const changeStatus = (id: string, isDone: boolean) => {
+		const newStatus = tasks.find(t => t.id === id)
+		if (newStatus) {
+			newStatus.isDone = isDone
+		}
+		setTasks([...tasks])
+	}
 	return (
 		<div className="app">
 			<Todolist
