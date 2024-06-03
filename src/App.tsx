@@ -14,12 +14,16 @@ import {Todolist} from "./Todolist";
 		{id: "3", title: "React", isDone: false},
 	]
 
+const removeTask =()=>{
+
+}
 
 	return (
 		<div className="app">
 			<Todolist
 				title={"What  to learn"}
 				tasks={tasks}
+				removeTask={removeTask}
 			/>
 		</div>
 	);
