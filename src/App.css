@@ -1,42 +1,56 @@
-
-.App {
-  display: flex;
-
-
-  align-items: center;
-  justify-content: center;
-}
-.container{
-  border: 2px solid #31e22b;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  min-height: 200px;
-}
-
-.container-button{
-  margin-bottom: 20px;
-
-}
-button:active {
-  background-color: #7ac2b8;
+ .app {
+   display: flex;
+   justify-content: center;
+ }
 
 
-}
-.red{
-  color: red;
-}
-.error{
-  border: red 2px solid;
 
-}
-.error-message{
-  color:red;
-}
-.activ-filter{
-  background-color: #4fff54;
 
-}
-.opasity{
-  opacity: 30%;
-}
+
+
+
+
+
+
+/*.App {*/
+/*  display: flex;*/
+
+
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+/*.container{*/
+/*  border: 2px solid #31e22b;*/
+/*  border-radius: 15px;*/
+/*  margin-bottom: 20px;*/
+/*  margin-right: 20px;*/
+/*  min-height: 200px;*/
+/*}*/
+
+/*.container-button{*/
+/*  margin-bottom: 20px;*/
+
+/*}*/
+/*button:active {*/
+/*  background-color: #7ac2b8;*/
+
+
+/*}*/
+/*.red{*/
+/*  color: red;*/
+/*}*/
+/*.error{*/
+/*  border: red 2px solid;*/
+
+/*}*/
+/*.error-message{*/
+/*  color:red;*/
+/*}*/
+/*.activ-filter{*/
+/*  background-color: #4fff54;*/
+
+/*}*/
+/*.opasity{*/
+/*  opacity: 30%;*/
+/*}*/
+
