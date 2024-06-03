@@ -69,7 +69,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 							changeStatus(task.id, e.currentTarget.checked)
 						}
 						return <li key={task.id}
-						className={task.isDone === true ? 'is-done': ""}>
+						className={task.isDone ? 'is-done': ""}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
 							<span> {task.title} </span>
 							<Button onClick={() => removeTask(task.id)} title={"X"}/>
