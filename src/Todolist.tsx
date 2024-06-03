@@ -14,7 +14,7 @@ type TodolistPropsType = {
 
 }
 export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: TodolistPropsType) => {
-	const [error, setError]=useState<string | null>(null)
+	const [error, setError] = useState<string | null>(null)
 	const [newTask, setNewtask] = useState("")
 	const [filter, setFilter] = useState<FilterValue>("ALL")
 	if (filter === "ACTIVE") {
@@ -31,9 +31,11 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 
 	}
 	const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+		setError(null)
 		if (e.key === "Enter") {
 			addTaskHandler()
 		}
+
 	}
 	const addTaskHandler = () => {
 		if (newTask.trim() !== "") {
@@ -49,7 +51,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 			<h1>{title}</h1>
 			<div>
 				<input
-					className={error ?"error": ""}
+					className={error ? "error" : ""}
 					type="text"
 					value={newTask}
 					onChange={onchangeHandler}
@@ -66,7 +68,8 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 						const changeTaskStatusHendler = (e: ChangeEvent<HTMLInputElement>) => {
 							changeStatus(task.id, e.currentTarget.checked)
 						}
-						return <li key={task.id}>
+						return <li key={task.id}
+						className={task.isDone === true ? 'is-done': ""}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
 							<span> {task.title} </span>
 							<Button onClick={() => removeTask(task.id)} title={"X"}/>
@@ -78,9 +81,15 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 
 			</ul>
 			<div>
-				<Button title={"All"} onClick={() => filterTasks("ALL")}/>
-				<Button title={"Active"} onClick={() => filterTasks("ACTIVE")}/>
-				<Button title={"Completed"} onClick={() => filterTasks("COMPLITED")}/>
+				<Button title={"All"}
+				        onClick={() => filterTasks("ALL")}
+				        className={filter === "ALL" ? 'active-filter' : ""}/>
+				<Button title={"Active"}
+				        onClick={() => filterTasks("ACTIVE")}
+						className={filter === "ACTIVE" ? 'active-filter' : ""}/>
+				<Button title={"Completed"}
+				        onClick={() => filterTasks("COMPLITED")}
+				        className={filter === "COMPLITED" ? 'active-filter' : ""}/>
 			</div>
 
 		</div>
