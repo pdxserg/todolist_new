@@ -80,7 +80,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: Todo
 
 
 			</ul>
-			<div >
+			<div className={"foter-buttons"} >
 				<Button title={"All"}
 				        onClick={() => filterTasks("ALL")}
 				        className={filter === "ALL" ? 'active-filter' : ""}/>

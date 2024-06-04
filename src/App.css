@@ -1,42 +1,46 @@
- .app {
-   display: flex;
-   justify-content: center;
-     background-color: #eeeeee;
+.app {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: #eeeeee;
 
- }
- .todolist {
-     border:  1px solid;
-     padding: 0  20px  20px;
-     border-radius: 30px 30px 30px 0;
-     background-color: #bebebe;
-     min-height: 250px;
- }
+}
 
- .error {
-     border: red 1px solid;
-     border-radius: 5px;
-     outline: none;
- }
+.todolist {
+    position: relative;
+    border: 1px solid;
+    padding: 0 20px 20px;
+    border-radius: 30px 30px 30px 0;
+    background-color: #bebebe;
+    min-height: 250px;
+}
 
- .error-message {
-     color: red;
- }
+.error {
+    border: red 1px solid;
+    border-radius: 5px;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+}
 
 
-
-.active-filter{
+.active-filter {
     background-color: greenyellow;
-    border:  1.5px solid;
+    border: 1.5px solid;
     border-radius: 3px;
 }
-.is-done{
+
+.is-done {
     opacity: 0.3;
 }
 
-.foter-buttons{
+.foter-buttons {
+    position: absolute;
+    bottom: 20px;
 
 }
-
 
 
 /*.App {*/
