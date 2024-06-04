@@ -22,7 +22,7 @@ export const EditableSpan = ({title, callBack}:EditableSpanPropsType) => {
 
 	}
 	return (
-		<div>
+		<>
 			{editMode
 				? <input type="text"
 				         value={newTitle}
@@ -32,7 +32,7 @@ export const EditableSpan = ({title, callBack}:EditableSpanPropsType) => {
 				: <span onDoubleClick={editModeHandler}>{title}</span>
 			}
 
-		</div>
+		</>
 	);
 };
 

@@ -16,7 +16,8 @@ type TodolistPropsType = {
 	filter: FilterValue
 	todolId: string
 	removeTodolist: (todolId: string) => void
-	changeTitleTodolist:(todolId: string , newTitle:string)=> void
+	changeTitleTodolist: (todolId: string, newTitle: string) => void
+	changeTitleTask: (todolId: string, taskId: string, newTitle: string) => void
 
 }
 export const Todolist = ({
@@ -29,7 +30,8 @@ export const Todolist = ({
 	                         filterTasks,
 	                         todolId,
 	                         removeTodolist,
-	                         changeTitleTodolist
+	                         changeTitleTodolist,
+	                         changeTitleTask
                          }: TodolistPropsType) => {
 
 
@@ -47,15 +49,17 @@ export const Todolist = ({
 		addTask(todolId, title)
 	}
 	const callBackHandler = (title: string) => {
-		console.log(title)
-		changeTitleTodolist(todolId,title)
+		changeTitleTodolist(todolId, title)
 	}
+
 	return (
 		<div className={'todolist'}>
 			<button onClick={() => removeTodolist(todolId)}
 			        className={"remove-todolist-button"}>x
 			</button>
-			<h1><EditableSpan title={title} callBack={callBackHandler}/></h1>
+			<h1>
+				<EditableSpan title={title} callBack={callBackHandler}/>
+			</h1>
 
 			<AddItemForm
 				addItem={addTaskCallback}
@@ -70,10 +74,15 @@ export const Todolist = ({
 						const changeTaskStatusHendler = (e: ChangeEvent<HTMLInputElement>) => {
 							changeStatus(todolId, task.id, e.currentTarget.checked)
 						}
+						const callBackTaskHandler = ( newTitle:string) => {
+							changeTitleTask(todolId , task.id, newTitle)
+						}
+
 						return <li key={task.id}
 						           className={task.isDone ? 'is-done' : ""}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
-							<span> {task.title} </span>
+							<EditableSpan title={task.title} callBack={callBackTaskHandler}/>
+							{/*<span> {task.title} </span>*/}
 							<Button onClick={() => removeTask(todolId, task.id)} title={"X"}/>
 
 						</li>
