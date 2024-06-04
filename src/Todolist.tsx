@@ -10,7 +10,7 @@ type TodolistPropsType = {
 	removeTask: (todolId:string, taskId: string) => void
 	filterTasks:(todolId:string, filter: FilterValue)=>void
 	addTask: (todolId:string, title: string) => void
-	changeStatus: (id: string, isDone: boolean) => void
+	changeStatus: (todolId:string, id: string, isDone: boolean) => void
 	filter: FilterValue
 	todolId:string
 
@@ -68,7 +68,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 					? <p> Nothing here </p>
 					: tasks.map(task => {
 						const changeTaskStatusHendler = (e: ChangeEvent<HTMLInputElement>) => {
-							changeStatus(task.id, e.currentTarget.checked)
+							changeStatus(todolId,task.id, e.currentTarget.checked)
 						}
 						return <li key={task.id}
 						className={task.isDone ? 'is-done': ""}>
