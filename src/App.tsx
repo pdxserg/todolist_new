@@ -37,7 +37,8 @@ export const App = () => {
 	})
 
 
-	const removeTask = (taskId: string) => {
+	const removeTask = ( todolId:string, taskId: string) => {
+		setTasks( {...tasks, [todolId]:tasks[todolId].filter(t=>t.id !== taskId ) })
 		// const newTasks = tasks.filter(f => f.id !== taskId)
 		// setTasks(newTasks)
 	}

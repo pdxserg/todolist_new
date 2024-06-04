@@ -7,7 +7,7 @@ import './App.css';
 type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskPropseType>
-	removeTask: (taskId: string) => void
+	removeTask: (todolId:string, taskId: string) => void
 	filterTasks:(todolId:string, filter: FilterValue)=>void
 	addTask: (title: string) => void
 	changeStatus: (id: string, isDone: boolean) => void
@@ -74,7 +74,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 						className={task.isDone ? 'is-done': ""}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
 							<span> {task.title} </span>
-							<Button onClick={() => removeTask(task.id)} title={"X"}/>
+							<Button onClick={() => removeTask(todolId, task.id)} title={"X"}/>
 
 						</li>
 					})
