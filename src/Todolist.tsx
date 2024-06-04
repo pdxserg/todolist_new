@@ -8,24 +8,25 @@ type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskPropseType>
 	removeTask: (taskId: string) => void
-	// filterTasks:(filter:FilterValue)=>void
+	filterTasks:(filter:FilterValue)=>void
 	addTask: (title: string) => void
 	changeStatus: (id: string, isDone: boolean) => void
+	filter: FilterValue
 
 }
-export const Todolist = ({title, tasks, removeTask, addTask, changeStatus}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks}: TodolistPropsType) => {
 	const [error, setError] = useState<string | null>(null)
 	const [newTask, setNewtask] = useState("")
-	const [filter, setFilter] = useState<FilterValue>("ALL")
-	if (filter === "ACTIVE") {
-		tasks = tasks.filter(f => f.isDone === true)
-	}
-	if (filter === "COMPLITED") {
-		tasks = tasks.filter(f => f.isDone === false)
-	}
-	const filterTasks = (filter: FilterValue) => {
-		setFilter(filter)
-	}
+	// const [filter, setFilter] = useState<FilterValue>("ALL")
+	// if (filter === "ACTIVE") {
+	// 	tasks = tasks.filter(f => f.isDone === true)
+	// }
+	// if (filter === "COMPLITED") {
+	// 	tasks = tasks.filter(f => f.isDone === false)
+	// }
+	// const filterTasks = (filter: FilterValue) => {
+	// 	setFilter(filter)
+	// }
 	const onchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		setNewtask(event.currentTarget.value)
 

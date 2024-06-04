@@ -15,17 +15,17 @@ export const App = () => {
 		{id: v1(), title: "JS", isDone: true},
 		{id: v1(), title: "React", isDone: false},
 	])
-	// const [filter, setFilter] = useState<FilterValue>("ALL")
-	// let tasksForTodolist = tasks
-	// if (filter === "ACTIVE") {
-	// 	tasksForTodolist = tasksForTodolist.filter(f => f.isDone === true)
-	// }
-	// if (filter === "COMPLITED") {
-	// 	tasksForTodolist = tasksForTodolist.filter(f => f.isDone === false)
-	// }
-	// const filterTasks = (filter: FilterValue) => {
-	// 	setFilter(filter)
-	// }
+	const [filter, setFilter] = useState<FilterValue>("ALL")
+	let tasksForTodolist = tasks
+	if (filter === "ACTIVE") {
+		tasksForTodolist = tasksForTodolist.filter(f => f.isDone === true)
+	}
+	if (filter === "COMPLITED") {
+		tasksForTodolist = tasksForTodolist.filter(f => f.isDone === false)
+	}
+	const filterTasks = (filter: FilterValue) => {
+		setFilter(filter)
+	}
 
 	const removeTask = (taskId: string) => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
@@ -38,7 +38,6 @@ export const App = () => {
 
 	const changeStatus = (id: string, isDone: boolean) => {
 		setTasks( tasks.map(t=> t.id === id? {...t, isDone: isDone}: t))
-
 		// const newStatus = tasks.find(t => t.id === id)
 		// if (newStatus) {
 		// 	newStatus.isDone = isDone
@@ -49,11 +48,12 @@ export const App = () => {
 		<div className="app">
 			<Todolist
 				title={"What  to learn"}
-				tasks={tasks}
+				tasks={tasksForTodolist}
 				removeTask={removeTask}
-				// filterTasks={filterTasks}
+				 filterTasks={filterTasks}
 				addTask={addTask}
 				changeStatus={changeStatus}
+				filter={filter}
 			/>
 		</div>
 	);
