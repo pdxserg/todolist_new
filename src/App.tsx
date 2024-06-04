@@ -76,7 +76,10 @@ setTodolists(todolists.filter(t=>t.id !== todolId))
 		setTasks({ ...tasks })
 	}
 	console.log(tasks)
-	const addTodolist = ()=>{
+	const addTodolist = (title:string)=>{
+const newTodolist = { id: v1(), title: title, filter: 'ALL' }
+		console.log(newTodolist)
+		// setTodolists([...todolists, newTodolist])
 
 	}
 	return (

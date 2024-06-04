@@ -2,28 +2,28 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 
 type AddItemFormPropsType = {
-	addItem:(todolId:string, title: string)=>void
-		todolId?:any
+	addItem:(title: string)=>void
+
 }
 
-export function AddItemForm({addItem, todolId }: AddItemFormPropsType) {
+export function AddItemForm({addItem,  }: AddItemFormPropsType) {
 	const [error, setError] = useState<string | null>(null)
-	const [newTask, setNewtask] = useState("")
+	const [title, setTitle] = useState("")
 	const onchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-		setNewtask(event.currentTarget.value)
+		setTitle(event.currentTarget.value)
 
 	}
 	const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
 		setError(null)
 		if (e.key === "Enter") {
-			addTaskHandler()
+			addItemHandler()
 		}
 
 	}
-	const addTaskHandler = () => {
-		if (newTask.trim() !== "") {
-			addItem(todolId,newTask.trim())
-			setNewtask("")
+	const addItemHandler = () => {
+		if (title.trim() !== "") {
+			addItem( title.trim())
+			setTitle("")
 		} else {
 			setError('Title is requred')
 		}
@@ -35,11 +35,11 @@ export function AddItemForm({addItem, todolId }: AddItemFormPropsType) {
 			<input
 				className={error ? "error" : ""}
 				type="text"
-				value={newTask}
+				value={title}
 				onChange={onchangeHandler}
 				onKeyDown={onKeyDownHandler}
 			/>
-			<button onClick={addTaskHandler}>+</button>
+			<button onClick={addItemHandler}>+</button>
 			{error && <div className={'error-message'}>{error}</div>}
 		</div>
 	);

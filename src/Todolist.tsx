@@ -40,6 +40,9 @@ export const Todolist = ({
 	// const filterTasks = (filter: FilterValue) => {
 	// 	setFilter(filter)
 	// }
+ const addTaskCallback =(title:string)=>{
+	 addTask(todolId, title)
+ }
 
 	return (
 		<div className={'todolist'}>
@@ -49,8 +52,8 @@ export const Todolist = ({
 			<h1>{title}</h1>
 
 			<AddItemForm
-				addItem={addTask}
-				todolId={todolId}
+				addItem={addTaskCallback}
+
 			/>
 
 
