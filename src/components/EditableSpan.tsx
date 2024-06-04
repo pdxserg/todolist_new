@@ -13,8 +13,12 @@ export const EditableSpan = ({title, callBack}:EditableSpanPropsType) => {
 		setEditMode(true)
 	}
 	const onBlurHandler=()=>{
-		callBack(newTitle)
+		// callBack(newTitle)
 		setEditMode(false)
+		if (newTitle.trim() !== "") {
+			callBack( newTitle.trim())
+
+		}
 	}
 	const onChangeHandler=(e:ChangeEvent<HTMLInputElement>)=>{
 		setNewTitle(e.currentTarget.value)

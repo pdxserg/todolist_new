@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button} from "../Button";
 
 
 type AddItemFormPropsType = {
@@ -39,7 +40,8 @@ export function AddItemForm({addItem,  }: AddItemFormPropsType) {
 				onChange={onchangeHandler}
 				onKeyDown={onKeyDownHandler}
 			/>
-			<button onClick={addItemHandler}>+</button>
+			<Button title={"+"} onClick={addItemHandler}/>
+			{/*<button onClick={addItemHandler}>+</button>*/}
 			{error && <div className={'error-message'}>{error}</div>}
 		</div>
 	);
