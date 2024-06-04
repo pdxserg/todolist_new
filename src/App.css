@@ -16,6 +16,10 @@
     min-height: 250px;
     min-width: 200px;
 }
+.add-item-form {
+    display: flex;
+    height: 22px;
+}
 
 .error {
     border: red 1px solid;

@@ -1,11 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
+
 type AddItemFormPropsType = {
-	addTask:(todolId:string, title: string)=>void
-	todolId:string
+	addItem:(todolId:string, title: string)=>void
+		todolId?:any
 }
 
-export function AddItemForm({addTask, todolId }: AddItemFormPropsType) {
+export function AddItemForm({addItem, todolId }: AddItemFormPropsType) {
 	const [error, setError] = useState<string | null>(null)
 	const [newTask, setNewtask] = useState("")
 	const onchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,7 @@ export function AddItemForm({addTask, todolId }: AddItemFormPropsType) {
 	}
 	const addTaskHandler = () => {
 		if (newTask.trim() !== "") {
-			addTask(todolId,newTask.trim())
+			addItem(todolId,newTask.trim())
 			setNewtask("")
 		} else {
 			setError('Title is requred')
@@ -30,7 +31,7 @@ export function AddItemForm({addTask, todolId }: AddItemFormPropsType) {
 
 
 	return (
-		<div>
+		<div className={'add-item-form'}>
 			<input
 				className={error ? "error" : ""}
 				type="text"

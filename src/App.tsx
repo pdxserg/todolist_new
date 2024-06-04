@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import './App.css';
+import {AddItemForm} from "./components/AddItemForm";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
@@ -75,8 +76,13 @@ setTodolists(todolists.filter(t=>t.id !== todolId))
 		setTasks({ ...tasks })
 	}
 	console.log(tasks)
+	const addTodolist = ()=>{
+
+	}
 	return (
 		<div className="app">
+
+			<AddItemForm addItem={addTodolist}/>
 			{todolists.length === 0
 			? <h2>NOTHIN</h2>
 			: todolists.map((tl)=>{

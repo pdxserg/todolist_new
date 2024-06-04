@@ -8,16 +8,26 @@ import {AddItemForm} from "./components/AddItemForm";
 type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskPropseType>
-	removeTask: (todolId:string, taskId: string) => void
-	filterTasks:(todolId:string, filter: FilterValue)=>void
-	addTask: (todolId:string, title: string) => void
-	changeStatus: (todolId:string, id: string, isDone: boolean) => void
+	removeTask: (todolId: string, taskId: string) => void
+	filterTasks: (todolId: string, filter: FilterValue) => void
+	addTask: (todolId: string, title: string) => void
+	changeStatus: (todolId: string, id: string, isDone: boolean) => void
 	filter: FilterValue
-	todolId:string
-	removeTodolist:(todolId:string)=>void
+	todolId: string
+	removeTodolist: (todolId: string) => void
 
 }
-export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks, todolId, removeTodolist}: TodolistPropsType) => {
+export const Todolist = ({
+	                         title,
+	                         tasks,
+	                         removeTask,
+	                         addTask,
+	                         changeStatus,
+	                         filter,
+	                         filterTasks,
+	                         todolId,
+	                         removeTodolist
+                         }: TodolistPropsType) => {
 
 
 	// const [filter, setFilter] = useState<FilterValue>("ALL")
@@ -33,13 +43,14 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 
 	return (
 		<div className={'todolist'}>
-			<button onClick={()=>removeTodolist(todolId)}
-				className={"remove-todolist-button"}>x</button>
+			<button onClick={() => removeTodolist(todolId)}
+			        className={"remove-todolist-button"}>x
+			</button>
 			<h1>{title}</h1>
 
 			<AddItemForm
-			addTask={addTask }
-			todolId={todolId}
+				addItem={addTask}
+				todolId={todolId}
 			/>
 
 
