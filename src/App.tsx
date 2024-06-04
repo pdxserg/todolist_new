@@ -9,7 +9,18 @@ export  type TaskPropseType = {
 	title: string
 	isDone: boolean
 }
+type TodolistType = {
+	id: string
+	title: string
+	filter: FilterValue
+}
+
 export const App = () => {
+	let [todolists, setTodolists] = useState<TodolistType[]>([
+		{ id: v1(), title: 'What to learn', filter: 'ALL' },
+		{ id: v1(), title: 'What to buy', filter: 'ALL' },
+	])
+
 	const [tasks, setTasks] = useState<Array<TaskPropseType>>([
 		{id: v1(), title: "CSS", isDone: true},
 		{id: v1(), title: "JS", isDone: true},
@@ -46,15 +57,19 @@ export const App = () => {
 	}
 	return (
 		<div className="app">
-			<Todolist
-				title={"What  to learn"}
-				tasks={tasksForTodolist}
-				removeTask={removeTask}
-				 filterTasks={filterTasks}
-				addTask={addTask}
-				changeStatus={changeStatus}
-				filter={filter}
-			/>
+			{todolists.map(tl=>{
+				return  <Todolist
+					key={tl.id}
+					title={tl.title}
+					tasks={tasksForTodolist}
+					removeTask={removeTask}
+					filterTasks={filterTasks}
+					addTask={addTask}
+					changeStatus={changeStatus}
+					filter={tl.filter}
+				/>
+			})}
+
 		</div>
 	);
 };
