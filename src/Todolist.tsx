@@ -13,9 +13,10 @@ type TodolistPropsType = {
 	changeStatus: (todolId:string, id: string, isDone: boolean) => void
 	filter: FilterValue
 	todolId:string
+	removeTodolist:(todolId:string)=>void
 
 }
-export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks, todolId}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks, todolId, removeTodolist}: TodolistPropsType) => {
 	const [error, setError] = useState<string | null>(null)
 	const [newTask, setNewtask] = useState("")
 	// const [filter, setFilter] = useState<FilterValue>("ALL")
@@ -50,7 +51,8 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 
 	return (
 		<div className={'todolist'}>
-			<button className={"remove-todolist-button"}>x</button>
+			<button onClick={()=>removeTodolist(todolId)}
+				className={"remove-todolist-button"}>x</button>
 			<h1>{title}</h1>
 
 			<div>

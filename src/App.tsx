@@ -64,6 +64,9 @@ export const App = () => {
 	const filterTasks = (todolId:string, filter: FilterValue) => {
 		setTodolists(todolists.map(tl=> tl.id === todolId? {...tl, filter}:tl))
 	}
+	const removeTodolist =(todolId:string)=>{
+
+	}
 	return (
 		<div className="app">
 
@@ -88,6 +91,7 @@ export const App = () => {
 					addTask={addTask}
 					changeStatus={changeStatus}
 					filter={tl.filter}
+					removeTodolist={removeTodolist}
 				/>
 			})}
 
