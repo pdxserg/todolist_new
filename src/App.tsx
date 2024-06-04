@@ -4,6 +4,11 @@ import {v1} from "uuid";
 import './App.css';
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
+
+type TasksPropsType = {
+	[key:string]: TaskPropseType[]
+}
+
 export  type TaskPropseType = {
 	id: string
 	title: string
@@ -24,7 +29,7 @@ export const App = () => {
 		{ id: todolistID2, title: 'What to buy', filter: 'ALL' },
 	])
 
-	let [tasks, setTasks] = useState({
+	let [tasks, setTasks] = useState<TasksPropsType>({
 		[todolistID1]: [
 			{ id: v1(), title: 'HTML&CSS', isDone: true },
 			{ id: v1(), title: 'JS', isDone: true },
