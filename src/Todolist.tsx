@@ -50,7 +50,9 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 
 	return (
 		<div className={'todolist'}>
+			<button className={"remove-todolist-button"}>x</button>
 			<h1>{title}</h1>
+
 			<div>
 				<input
 					className={error ? "error" : ""}
@@ -68,10 +70,10 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 					? <p> Nothing here </p>
 					: tasks.map(task => {
 						const changeTaskStatusHendler = (e: ChangeEvent<HTMLInputElement>) => {
-							changeStatus(todolId,task.id, e.currentTarget.checked)
+							changeStatus(todolId, task.id, e.currentTarget.checked)
 						}
 						return <li key={task.id}
-						className={task.isDone ? 'is-done': ""}>
+						           className={task.isDone ? 'is-done' : ""}>
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
 							<span> {task.title} </span>
 							<Button onClick={() => removeTask(todolId, task.id)} title={"X"}/>
@@ -82,15 +84,15 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 
 
 			</ul>
-			<div className={"foter-buttons"} >
+			<div className={"foter-buttons"}>
 				<Button title={"All"}
-				        onClick={() => filterTasks(todolId,"ALL")}
+				        onClick={() => filterTasks(todolId, "ALL")}
 				        className={filter === "ALL" ? 'active-filter' : ""}/>
 				<Button title={"Active"}
-				        onClick={() => filterTasks(todolId,"ACTIVE")}
-						className={filter === "ACTIVE" ? 'active-filter' : ""}/>
+				        onClick={() => filterTasks(todolId, "ACTIVE")}
+				        className={filter === "ACTIVE" ? 'active-filter' : ""}/>
 				<Button title={"Completed"}
-				        onClick={() => filterTasks(todolId,"COMPLITED")}
+				        onClick={() => filterTasks(todolId, "COMPLITED")}
 				        className={filter === "COMPLITED" ? 'active-filter' : ""}/>
 			</div>
 
