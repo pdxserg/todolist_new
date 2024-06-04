@@ -26,17 +26,9 @@ export const App = () => {
 		{id: v1(), title: "JS", isDone: true},
 		{id: v1(), title: "React", isDone: false},
 	])
-	const [filter, setFilter] = useState<FilterValue>("ALL")
+
 	let tasksForTodolist = tasks
-	if (filter === "ACTIVE") {
-		tasksForTodolist = tasksForTodolist.filter(f => f.isDone === true)
-	}
-	if (filter === "COMPLITED") {
-		tasksForTodolist = tasksForTodolist.filter(f => f.isDone === false)
-	}
-	const filterTasks = (filter: FilterValue) => {
-		setFilter(filter)
-	}
+
 
 	const removeTask = (taskId: string) => {
 		const newTasks = tasks.filter(f => f.id !== taskId)
@@ -55,11 +47,26 @@ export const App = () => {
 		// }
 		// setTasks([...tasks])
 	}
+	const filterTasks = (todolId:string, filter: FilterValue) => {
+		setTodolists(todolists.map(tl=> tl.id === todolId? {...tl, filter}:tl))
+	}
 	return (
 		<div className="app">
+
 			{todolists.map(tl=>{
+				let tasksForTodolist = tasks
+				if (tl.filter === "ACTIVE") {
+					tasksForTodolist = tasks.filter(f => f.isDone === true)
+				}
+				if (tl.filter === "COMPLITED") {
+					tasksForTodolist = tasks.filter(f => f.isDone === false)
+				}
+
+
+
 				return  <Todolist
 					key={tl.id}
+					todolId={tl.id}
 					title={tl.title}
 					tasks={tasksForTodolist}
 					removeTask={removeTask}

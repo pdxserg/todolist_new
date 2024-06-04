@@ -8,13 +8,14 @@ type TodolistPropsType = {
 	title: string
 	tasks: Array<TaskPropseType>
 	removeTask: (taskId: string) => void
-	filterTasks:(filter:FilterValue)=>void
+	filterTasks:(todolId:string, filter: FilterValue)=>void
 	addTask: (title: string) => void
 	changeStatus: (id: string, isDone: boolean) => void
 	filter: FilterValue
+	todolId:string
 
 }
-export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filter, filterTasks, todolId}: TodolistPropsType) => {
 	const [error, setError] = useState<string | null>(null)
 	const [newTask, setNewtask] = useState("")
 	// const [filter, setFilter] = useState<FilterValue>("ALL")
@@ -83,13 +84,13 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 			</ul>
 			<div className={"foter-buttons"} >
 				<Button title={"All"}
-				        onClick={() => filterTasks("ALL")}
+				        onClick={() => filterTasks(todolId,"ALL")}
 				        className={filter === "ALL" ? 'active-filter' : ""}/>
 				<Button title={"Active"}
-				        onClick={() => filterTasks("ACTIVE")}
+				        onClick={() => filterTasks(todolId,"ACTIVE")}
 						className={filter === "ACTIVE" ? 'active-filter' : ""}/>
 				<Button title={"Completed"}
-				        onClick={() => filterTasks("COMPLITED")}
+				        onClick={() => filterTasks(todolId,"COMPLITED")}
 				        className={filter === "COMPLITED" ? 'active-filter' : ""}/>
 			</div>
 
