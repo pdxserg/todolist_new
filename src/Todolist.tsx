@@ -3,6 +3,7 @@ import {FilterValue, TaskPropseType} from "./App";
 import {Button} from "./Button";
 import './App.css';
 import {AddItemForm} from "./components/AddItemForm";
+import {EditableSpan} from "./components/EditableSpan";
 
 
 type TodolistPropsType = {
@@ -15,6 +16,7 @@ type TodolistPropsType = {
 	filter: FilterValue
 	todolId: string
 	removeTodolist: (todolId: string) => void
+	changeTitleTodolist:(todolId: string , newTitle:string)=> void
 
 }
 export const Todolist = ({
@@ -26,7 +28,8 @@ export const Todolist = ({
 	                         filter,
 	                         filterTasks,
 	                         todolId,
-	                         removeTodolist
+	                         removeTodolist,
+	                         changeTitleTodolist
                          }: TodolistPropsType) => {
 
 
@@ -40,16 +43,19 @@ export const Todolist = ({
 	// const filterTasks = (filter: FilterValue) => {
 	// 	setFilter(filter)
 	// }
- const addTaskCallback =(title:string)=>{
-	 addTask(todolId, title)
- }
-
+	const addTaskCallback = (title: string) => {
+		addTask(todolId, title)
+	}
+	const callBackHandler = (title: string) => {
+		console.log(title)
+		changeTitleTodolist(todolId,title)
+	}
 	return (
 		<div className={'todolist'}>
 			<button onClick={() => removeTodolist(todolId)}
 			        className={"remove-todolist-button"}>x
 			</button>
-			<h1>{title}</h1>
+			<h1><EditableSpan title={title} callBack={callBackHandler}/></h1>
 
 			<AddItemForm
 				addItem={addTaskCallback}
