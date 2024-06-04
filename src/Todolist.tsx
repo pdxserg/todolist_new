@@ -41,17 +41,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeStatus, filte
 			addTask={addTask }
 			todolId={todolId}
 			/>
-			{/*<div>*/}
-			{/*	<input*/}
-			{/*		className={error ? "error" : ""}*/}
-			{/*		type="text"*/}
-			{/*		value={newTask}*/}
-			{/*		onChange={onchangeHandler}*/}
-			{/*		onKeyDown={onKeyDownHandler}*/}
-			{/*	/>*/}
-			{/*	<button onClick={addTaskHandler}>+</button>*/}
-			{/*	{error && <div className={'error-message'}>{error}</div>}*/}
-			{/*</div>*/}
+
 
 			<ul>
 				{tasks.length === 0
