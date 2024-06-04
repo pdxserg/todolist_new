@@ -1,5 +1,16 @@
 
-export const todolistsReducer=(state:any, action:any)=>{
+
+type todolistsReducerTyp={
+	type:any
+	playholder:{
+
+	}
+}
+
+class TodolistType {
+}
+
+export const todolistsReducer=(state:TodolistType[], action:todolistsReducerTyp):TodolistType[]=>{
 	switch (action.type){
 		case "AAAA":{
 			return state
