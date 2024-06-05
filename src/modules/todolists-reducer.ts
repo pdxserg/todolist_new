@@ -31,18 +31,13 @@ export type ChangeFilterTodolistType={
 }
 
  type ActionsType = removeTodoListAction
-	 |addTodoListType
+	 | addTodoListType
 	 | ChangeTitleTodolistType
-	 |ChangeFilterTodolistType
+	 | ChangeFilterTodolistType
 
-let todolistID1 = v1()
-let todolistID2 = v1()
 
-const initialState: TodolistType[] = [
-	{ id: todolistID1, title: 'What to learn', filter: 'ALL' },
-	{ id: todolistID2, title: 'What to buy', filter: 'ALL' },
-]
-export const todolistsReducer=(state:TodolistType[]=initialState, action:ActionsType ):TodolistType[]=>{
+
+export const todolistsReducer=(state:TodolistType[], action:ActionsType ):TodolistType[]=>{
 	switch (action.type){
 		case "REMOVE-TODOLIST":{
 			return state.filter(i=>i.id !== action.payload.id )
