@@ -26,11 +26,12 @@ test("Remove todolist", () => {
 	expect(endstate[0].title).toBe("What to buy")
 })
 test("Add todolist", () => {
-
-	const endstate = todolistsReducer(initialState, addTodoListAC("Ben"))
+const newId = "ssss"
+	const endstate = todolistsReducer(initialState, addTodoListAC(newId,"Ben"))
 
 	expect(endstate.length).toBe(3)
 	expect(endstate[0].title).toBe("Ben")
+	expect(endstate[0].id).toBe("ssss")
 })
 test("Chage title todolist", () => {
 
