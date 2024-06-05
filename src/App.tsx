@@ -10,7 +10,14 @@ import {
 	removeTodolistAC,
 	todolistsReducer
 } from "./modules/todolists-reducer";
-import {addEmptyArray, addTaskAC, removeTaskAC, tasksReducer} from "./modules/task-reducer";
+import {
+	addEmptyArray,
+	addTaskAC,
+	changeTaskStatusAC,
+	changeTitleTaskAC,
+	removeTaskAC,
+	tasksReducer
+} from "./modules/task-reducer";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
@@ -63,7 +70,8 @@ export const App = () => {
 	}
 
 	const changeStatus = (todolId: string, id: string, isDone: boolean) => {
-		// setTasks({...tasks, [todolId]: tasks[todolId].map(t => t.id === id ? {...t, isDone: isDone} : t)})
+		// setTasks({...tasks, [todolId]: tasks[todolId].map(t => t.id === id ? {...t, isDone: isDone} : t)}).
+		dispatchTasks(changeTaskStatusAC(todolId, id, isDone ))
 	}
 	const filterTasks = (todolId: string, filter: FilterValue) => {
 		dispatch(changeFilterTodoListAC(todolId, filter))
@@ -89,6 +97,7 @@ export const App = () => {
 	}
 	const changeTitleTask = (todolId: string, taskId: string, newTitle: string) => {
 		// setTasks({...tasks, [todolId]: tasks[todolId].map(t => t.id === taskId ? {...t, title: newTitle} : t)})
+		dispatchTasks(changeTitleTaskAC(todolId, taskId, newTitle ))
 	}
 
 	return (
