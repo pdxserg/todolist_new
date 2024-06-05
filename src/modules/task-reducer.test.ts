@@ -5,7 +5,7 @@ import {changeTaskStatusAC, removeTaskAC, tasksReducer} from "./task-reducer";
 
 
 
-test("remove task ", () => {
+test("remove task", () => {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 

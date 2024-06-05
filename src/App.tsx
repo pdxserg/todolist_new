@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import './App.css';
