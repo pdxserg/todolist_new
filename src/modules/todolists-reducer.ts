@@ -31,11 +31,11 @@ export const todolistsReducer=(state:TodolistType[]=initialState, action:Actions
 		 case "ADD-TODOLIST":{
 			 const newtodolist:TodolistType={ id: todolistID2, title: action.payload.title, filter: 'ALL' }
 			 return [ newtodolist, ...state, ]
-
-
-
-
 		 }
+		case "CHANGE-TITLE":{
+			return state.map(s=>s.id === action.payload.id ?{...s, title:action.payload.title} : s)
+		}
+
 
 		 default:
 			return state

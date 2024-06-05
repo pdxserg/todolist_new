@@ -73,3 +73,34 @@ test ("Add todolist",()=>{
 	expect(endstate.length).toBe(3)
 	expect(endstate[0].title).toBe("Ben")
 })
+test ("Chage title todolist",()=>{
+
+	type TodolistType = {
+		id: string
+		title: string
+		filter: FilterValue
+	}
+	let todolistID1 = v1()
+	let todolistID2 = v1()
+
+	const initialState:TodolistType[]= [
+		{ id: todolistID1, title: 'What to learn', filter: 'ALL' },
+		{ id: todolistID2, title: 'What to buy', filter: 'ALL' }
+	]
+
+	const action ={
+		type:"CHANGE-TITLE",
+		payload:{
+			id: todolistID2,
+			title: "Ben"
+		}
+	}
+
+	const endstate =todolistsReducer(initialState, action)
+	// 	function sum (a:number,b:number){
+	// 	return a+b
+	// }
+
+	expect(endstate.length).toBe(2)
+	expect(endstate[1].title).toBe("Ben")
+})
