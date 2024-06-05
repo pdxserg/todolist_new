@@ -15,9 +15,16 @@ type AddTaskType ={
 		title: string
 	}
 }
+type AddEmptyArrayType ={
+	type:"ADD-EMPTY-ARRAY"
+	payload:{
+		newId: string,
+
+	}
+}
 
 
-type ActionsType =RemoveTaskType |AddTaskType
+type ActionsType =RemoveTaskType |AddTaskType |AddEmptyArrayType
 export const tasksReducer= (state:TasksPropsType, action:ActionsType )=>{
 	switch (action.type){
 		case"REMOVE-TASK":{
@@ -27,6 +34,9 @@ export const tasksReducer= (state:TasksPropsType, action:ActionsType )=>{
 		case"ADD-TASK":{
 			const newTask = {id: v1(), title: action.payload.title, isDone: false}
 			return {...state,[action.payload.todolId]:[...state[action.payload.todolId], newTask]}
+		}
+		case "ADD-EMPTY-ARRAY":{
+			return {...state, [action.payload.newId]: []}
 		}
 		default: {
 			return state
@@ -51,5 +61,13 @@ export const addTaskAC = (todolId: string, title: string):AddTaskType=>{
 			todolId,
 			title
 		}
+	}as const
+}
+export const addEmptyArray= (newId: string)=>{
+	return {
+		type: "ADD-EMPTY-ARRAY",
+		payload:{
+			newId
+	}
 	}as const
 }

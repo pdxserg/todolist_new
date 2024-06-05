@@ -10,7 +10,7 @@ import {
 	removeTodolistAC,
 	todolistsReducer
 } from "./modules/todolists-reducer";
-import {addTaskAC, removeTaskAC, tasksReducer} from "./modules/task-reducer";
+import {addEmptyArray, addTaskAC, removeTaskAC, tasksReducer} from "./modules/task-reducer";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
@@ -38,7 +38,7 @@ export const App = () => {
 		{id: todolistID2, title: 'What to buy', filter: 'ALL'},
 	])
 
-	let [tasks, dispatchTasks] = useReducer(tasksReducer,{
+	let [tasks, dispatchTasks] = useReducer(tasksReducer, {
 		[todolistID1]: [
 			{id: v1(), title: 'HTML&CSS', isDone: true},
 			{id: v1(), title: 'JS', isDone: true},
@@ -53,13 +53,13 @@ export const App = () => {
 	console.log(todolists)
 	console.log(tasks)
 	const removeTask = (todolId: string, taskId: string) => {
-		dispatchTasks(removeTaskAC(todolId,taskId))
+		dispatchTasks(removeTaskAC(todolId, taskId))
 		// setTasks({...tasks, [todolId]: tasks[todolId].filter(t => t.id !== taskId)})
 	}
 	const addTask = (todolId: string, title: string) => {
 		// const newTask = {id: v1(), title: title, isDone: false}
 		// setTasks({...tasks, [todolId]: [newTask, ...tasks[todolId]]})
-		dispatchTasks(addTaskAC(todolId,title))
+		dispatchTasks(addTaskAC(todolId, title))
 	}
 
 	const changeStatus = (todolId: string, id: string, isDone: boolean) => {
@@ -68,16 +68,17 @@ export const App = () => {
 	const filterTasks = (todolId: string, filter: FilterValue) => {
 		dispatch(changeFilterTodoListAC(todolId, filter))
 	}
- 	const removeTodolist = (todolId: string) => {
+	const removeTodolist = (todolId: string) => {
 		dispatch(removeTodolistAC(todolId))
- 		delete tasks[todolId]
+		delete tasks[todolId]
 		// setTasks({...tasks})
 	}
 	const addTodolist = (title: string) => {
 		const newId = "SSSSSSS"
-		dispatch(addTodoListAC(title, newId))
+		dispatch(addTodoListAC(newId, title))
 		// const newTodolist: TodolistType = {id: newId, title: title, filter: 'ALL'}
 		// setTodolists([ newTodolist , ...todolists])
+		dispatchTasks(addEmptyArray(newId))
 		// setTasks({...tasks, [newId]: []})
 
 	}
