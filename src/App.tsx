@@ -40,7 +40,7 @@ export const App = () => {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 
-	let [todolists, dispatch] = useReducer(todolistsReducer, [
+	let [todolists, dispatchTodolists] = useReducer(todolistsReducer, [
 		{id: todolistID1, title: 'What to learn', filter: 'ALL'},
 		{id: todolistID2, title: 'What to buy', filter: 'ALL'},
 	])
@@ -74,17 +74,17 @@ export const App = () => {
 		dispatchTasks(changeTaskStatusAC(todolId, id, isDone ))
 	}
 	const filterTasks = (todolId: string, filter: FilterValue) => {
-		dispatch(changeFilterTodoListAC(todolId, filter))
+		dispatchTodolists(changeFilterTodoListAC(todolId, filter))
 	}
 	const removeTodolist = (todolId: string) => {
-		dispatch(removeTodolistAC(todolId))
+		dispatchTodolists(removeTodolistAC(todolId))
 		delete tasks[todolId]
 		//????????? setTasks({...tasks})
 	// 	?????????????
 	}
 	const addTodolist = (title: string) => {
 		const newId = "SSSSSSS"
-		dispatch(addTodoListAC(newId, title))
+		dispatchTodolists(addTodoListAC(newId, title))
 		// const newTodolist: TodolistType = {id: newId, title: title, filter: 'ALL'}
 		// setTodolists([ newTodolist , ...todolists])
 		dispatchTasks(addEmptyArray(newId))
@@ -93,7 +93,7 @@ export const App = () => {
 	}
 
 	const changeTitleTodolist = (todolId: string, newTitle: string) => {
-		dispatch(changeTitleTodoListAC(todolId, newTitle))
+		dispatchTodolists(changeTitleTodoListAC(todolId, newTitle))
 	}
 	const changeTitleTask = (todolId: string, taskId: string, newTitle: string) => {
 		// setTasks({...tasks, [todolId]: tasks[todolId].map(t => t.id === taskId ? {...t, title: newTitle} : t)})

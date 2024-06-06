@@ -41,7 +41,7 @@ type ChangeTitleTaskType ={
 
 
 type ActionsType =RemoveTaskType |AddTaskType |AddEmptyArrayType |ChangeTaskStatusType |ChangeTitleTaskType
-export const tasksReducer= (state:TasksPropsType, action:ActionsType )=>{
+export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksPropsType=>{
 	switch (action.type){
 		case"REMOVE-TASK":{
 			return {...state,[action.payload.todolId]:
