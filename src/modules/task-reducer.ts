@@ -1,13 +1,13 @@
 import {TasksPropsType} from "../App";
 import {v1} from "uuid";
 
-type RemoveTaskType ={
-	type:"REMOVE-TASK"
-	payload:{
-		todolId: string,
-		taskId: string
-	}
-}
+// type RemoveTaskType ={
+// 	type:"REMOVE-TASK"
+// 	payload:{
+// 		todolId: string,
+// 		taskId: string
+// 	}
+// }
 type AddTaskType ={
 	type:"ADD-TASK"
 	payload:{
@@ -69,8 +69,8 @@ export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksProp
 		}
 	}
 }
-
-export const removeTaskAC = (todolId: string, taskId: string):RemoveTaskType=>{
+type RemoveTaskType= ReturnType<typeof removeTaskAC>
+export const removeTaskAC = (todolId: string, taskId: string)=>{
 	return{
 		type:"REMOVE-TASK",
 		payload:{
