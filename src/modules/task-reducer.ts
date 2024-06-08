@@ -49,7 +49,7 @@ export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksProp
 		}
 		case"ADD-TASK":{
 			const newTask = {id: v1(), title: action.title, isDone: false}
-			return {[action.todolId]:[...state[action.todolId], newTask], ...state,}
+			return {...state, [action.todolId]:[newTask,...state[action.todolId]] }
 		}
 		case "ADD-EMPTY-ARRAY":{
 			return {...state, [action.payload.newId]: []}
