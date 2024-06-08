@@ -8,13 +8,13 @@ import {v1} from "uuid";
 // 		taskId: string
 // 	}
 // }
-type AddTaskType ={
-	type:"ADD-TASK"
-	payload:{
-		todolId: string,
-		title: string
-	}
-}
+// type AddTaskType ={
+// 	type:"ADD-TASK"
+// 	payload:{
+// 		todolId: string,
+// 		title: string
+// 	}
+// }
 type AddEmptyArrayType ={
 	type:"ADD-EMPTY-ARRAY"
 	payload:{
@@ -48,8 +48,8 @@ export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksProp
 					state[action.todolId].filter(s=> s.id !== action.taskId) }
 		}
 		case"ADD-TASK":{
-			const newTask = {id: v1(), title: action.payload.title, isDone: false}
-			return {...state,[action.payload.todolId]:[...state[action.payload.todolId], newTask]}
+			const newTask = {id: v1(), title: action.title, isDone: false}
+			return {[action.todolId]:[...state[action.todolId], newTask], ...state,}
 		}
 		case "ADD-EMPTY-ARRAY":{
 			return {...state, [action.payload.newId]: []}
@@ -78,13 +78,13 @@ export const removeTaskAC = (todolId: string, taskId: string)=>{
 	}as const
 }
 
-export const addTaskAC = (todolId: string, title: string):AddTaskType=>{
+
+type AddTaskType =ReturnType<typeof  addTaskAC>
+export const addTaskAC = (todolId: string, title: string) =>{
 	return{
 		type:"ADD-TASK",
-		payload:{
 			todolId,
 			title
-		}
 	}as const
 }
 export const addEmptyArray= (newId: string):AddEmptyArrayType=>{
