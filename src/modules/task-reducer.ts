@@ -22,14 +22,14 @@ type AddEmptyArrayType ={
 
 	}
 }
-type ChangeTaskStatusType ={
-	type:"CHANGE-STATUS-TASK"
-	payload:{
-		todolId: string,
-		id: string,
-		isDone: boolean
-	}
-}
+// type ChangeTaskStatusType ={
+// 	type:"CHANGE-STATUS-TASK"
+// 	payload:{
+// 		todolId: string,
+// 		id: string,
+// 		isDone: boolean
+// 	}
+// }
 type ChangeTitleTaskType ={
 	type:"CHANGE-TITLE-TASK"
 	payload:{
@@ -55,9 +55,9 @@ export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksProp
 			return {...state, [action.payload.newId]: []}
 		}
 		case "CHANGE-STATUS-TASK":{
-			return {...state, [action.payload.todolId]:
-					state[action.payload.todolId].map(s=>s.id === action.payload.id
-						?{...s, isDone: action.payload.isDone} :s) }
+			return {...state, [action.todolId]:
+					state[action.todolId].map(s=>s.id === action.id
+						?{...s, isDone: action.isDone} :s) }
 		}
 		case "CHANGE-TITLE-TASK":{
 			return {...state,
@@ -95,14 +95,13 @@ export const addEmptyArray= (newId: string):AddEmptyArrayType=>{
 	}
 	}as const
 }
-export const changeTaskStatusAC= (todolId: string, id: string, isDone: boolean):ChangeTaskStatusType=>{
+type ChangeTaskStatusType= ReturnType<typeof changeTaskStatusAC>
+export const changeTaskStatusAC= (todolId: string, id: string, isDone: boolean) =>{
 	return {
 		type: "CHANGE-STATUS-TASK",
-		payload:{
 			todolId,
 			id,
 			isDone
-	}
 	}as const
 }
 
