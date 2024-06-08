@@ -44,8 +44,8 @@ type ActionsType =RemoveTaskType |AddTaskType |AddEmptyArrayType |ChangeTaskStat
 export const tasksReducer= (state:TasksPropsType, action:ActionsType ):TasksPropsType=>{
 	switch (action.type){
 		case"REMOVE-TASK":{
-			return {...state,[action.payload.todolId]:
-					state[action.payload.todolId].filter(s=> s.id !== action.payload.taskId) }
+			return {...state,[action.todolId]:
+					state[action.todolId].filter(s=> s.id !== action.taskId) }
 		}
 		case"ADD-TASK":{
 			const newTask = {id: v1(), title: action.payload.title, isDone: false}
@@ -73,10 +73,8 @@ type RemoveTaskType= ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (todolId: string, taskId: string)=>{
 	return{
 		type:"REMOVE-TASK",
-		payload:{
 			todolId,
 			taskId
-		}
 	}as const
 }
 
