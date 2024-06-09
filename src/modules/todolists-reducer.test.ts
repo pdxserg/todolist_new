@@ -27,7 +27,7 @@ test("Remove todolist", () => {
 })
 test("Add todolist", () => {
 const newId = "ssss"
-	const endstate = todolistsReducer(initialState, addTodoListAC(newId,"Ben"))
+	const endstate = todolistsReducer(initialState, addTodoListAC("Ben"))
 
 	expect(endstate.length).toBe(3)
 	expect(endstate[0].title).toBe("Ben")
