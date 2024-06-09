@@ -8,13 +8,13 @@ import {FilterValue, TodolistType} from "../App";
 		id: string
 	}
 }
-export type addTodoListType={
-	type:"ADD-TODOLIST"
-	payload:{
-		id:string
-		title:string
-	}
-}
+// export type addTodoListType={
+// 	type:"ADD-TODOLIST"
+// 	payload:{
+// 		id:string
+// 		title:string
+// 	}
+// }
 export type ChangeTitleTodolistType={
 	type:"CHANGE-TITLE",
 	payload:{
@@ -67,8 +67,8 @@ export const removeTodolistAC = (todolistId: string): removeTodoListAction => {
 		}
 	} as const
 }
-
-export const addTodoListAC =(newId:string, title:string):addTodoListType=>{
+type addTodoListType = ReturnType<typeof addTodoListAC>
+export const addTodoListAC =(newId:string, title:string) =>{
 	 return{
 		 type: "ADD-TODOLIST",
 		 payload:{
