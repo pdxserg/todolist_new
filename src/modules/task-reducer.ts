@@ -16,13 +16,9 @@ import {AddTodoListType, removeTodoListAction} from "./todolists-reducer";
 // 		title: string
 // 	}
 // }
-type AddEmptyArrayType = {
-	type: "ADD-EMPTY-ARRAY"
-	payload: {
-		newId: string,
-
-	}
-}
+// type AddEmptyArrayType = {
+// 	type: "ADD-EMPTY-ARRAY"
+// }
 // type ChangeTaskStatusType ={
 // 	type:"CHANGE-STATUS-TASK"
 // 	payload:{
@@ -43,7 +39,7 @@ type ChangeTitleTaskType = {
 
 type ActionsType = RemoveTaskType
 	| AddTaskType
-	| AddEmptyArrayType
+	// | AddEmptyArrayType
 	| ChangeTaskStatusType
 	| ChangeTitleTaskType
 	| AddTodoListType
@@ -60,9 +56,9 @@ export const tasksReducer = (state: TasksPropsType, action: ActionsType): TasksP
 			const newTask = {id: v1(), title: action.title, isDone: false}
 			return {...state, [action.todolId]: [newTask, ...state[action.todolId]]}
 		}
-		case "ADD-EMPTY-ARRAY": {
-			return {...state, [action.payload.newId]: []}
-		}
+		// case "ADD-EMPTY-ARRAY": {
+		// 	return {...state, [ ]: []}
+		// }
 		case "CHANGE-STATUS-TASK": {
 			return {
 				...state, [action.todolId]:
@@ -81,8 +77,9 @@ export const tasksReducer = (state: TasksPropsType, action: ActionsType): TasksP
 			return {...state, [action.id]: []}
 		}
 		case "REMOVE-TODOLIST":{
-			 delete state[action.payload.todolistId]
-			return  {...state}
+			const copy = {...state}
+			 delete copy[action.payload.todolistId]
+			return  {...copy}
 		}
 		default: {
 			return state
@@ -107,14 +104,12 @@ export const addTaskAC = (todolId: string, title: string) => {
 		title
 	} as const
 }
-export const addEmptyArray = (newId: string): AddEmptyArrayType => {
-	return {
-		type: "ADD-EMPTY-ARRAY",
-		payload: {
-			newId
-		}
-	} as const
-}
+// type AddEmptyArrayType=ReturnType<typeof addEmptyArray>
+// export const addEmptyArray = () => {
+// 	return {
+// 		type: "ADD-EMPTY-ARRAY",
+// 	} as const
+// }
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
 export const changeTaskStatusAC = (todolId: string, id: string, isDone: boolean) => {
 	return {

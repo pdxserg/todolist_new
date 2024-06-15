@@ -11,7 +11,6 @@ import {
 	todolistsReducer
 } from "./modules/todolists-reducer";
 import {
-	addEmptyArray,
 	addTaskAC,
 	changeTaskStatusAC,
 	changeTitleTaskAC,
@@ -83,11 +82,11 @@ export const App = () => {
 	// 	?????????????
 	}
 	const addTodolist = (title: string) => {
-		const newId = "SSSSSSS"
 		dispatchTodolists(addTodoListAC( title))
 		// const newTodolist: TodolistType = {id: newId, title: title, filter: 'ALL'}
 		// setTodolists([ newTodolist , ...todolists])
-		dispatchTasks(addEmptyArray(newId))
+		//                  dispatchTasks(addEmptyArray( ))
+		dispatchTasks(addTodoListAC( title))
 		// setTasks({...tasks, [newId]: []})
 
 	}
