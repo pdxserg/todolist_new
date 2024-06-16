@@ -2,31 +2,6 @@ import {TasksPropsType} from "../App";
 import {v1} from "uuid";
 import {AddTodoListType, removeTodoListAction} from "./todolists-reducer";
 
-// type RemoveTaskType ={
-// 	type:"REMOVE-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		taskId: string
-// 	}
-// }
-// type AddTaskType ={
-// 	type:"ADD-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		title: string
-// 	}
-// }
-// type AddEmptyArrayType = {
-// 	type: "ADD-EMPTY-ARRAY"
-// }
-// type ChangeTaskStatusType ={
-// 	type:"CHANGE-STATUS-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		id: string,
-// 		isDone: boolean
-// 	}
-// }
 type ChangeTitleTaskType = {
 	type: "CHANGE-TITLE-TASK"
 	payload: {
@@ -36,15 +11,17 @@ type ChangeTitleTaskType = {
 	}
 }
 
-
 export type TaskActionsType = RemoveTaskType
 	| AddTaskType
-	// | AddEmptyArrayType
 	| ChangeTaskStatusType
 	| ChangeTitleTaskType
 	| AddTodoListType
 	| removeTodoListAction
-export const tasksReducer = (state: TasksPropsType, action: TaskActionsType): TasksPropsType => {
+
+const initialState: TasksPropsType = {}
+
+export const tasksReducer = (state  = initialState, action: TaskActionsType): TasksPropsType => {
+
 	switch (action.type) {
 		case"REMOVE-TASK": {
 			return {
@@ -56,9 +33,6 @@ export const tasksReducer = (state: TasksPropsType, action: TaskActionsType): Ta
 			const newTask = {id: v1(), title: action.title, isDone: false}
 			return {...state, [action.todolId]: [newTask, ...state[action.todolId]]}
 		}
-		// case "ADD-EMPTY-ARRAY": {
-		// 	return {...state, [ ]: []}
-		// }
 		case "CHANGE-STATUS-TASK": {
 			return {
 				...state, [action.todolId]:
@@ -106,12 +80,6 @@ export const addTaskAC = (todolId: string, title: string) => {
 		title
 	} as const
 }
-// type AddEmptyArrayType=ReturnType<typeof addEmptyArray>
-// export const addEmptyArray = () => {
-// 	return {
-// 		type: "ADD-EMPTY-ARRAY",
-// 	} as const
-// }
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
 export const changeTaskStatusAC = (todolId: string, id: string, isDone: boolean) => {
 	return {

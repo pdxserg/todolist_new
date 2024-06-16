@@ -1,6 +1,6 @@
 
 import {TasksPropsType} from "../App";
-import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from "./task-reducer";
+import {addTaskAC, changeTaskStatusAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
 import {addTodoListAC, removeTodolistAC} from "./todolists-reducer";
 
 

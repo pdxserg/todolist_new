@@ -16,7 +16,7 @@ import {
 	changeTitleTaskAC,
 	removeTaskAC, TaskActionsType,
 	tasksReducer
-} from "./modules/task-reducer";
+} from "./modules/tasks-reducer";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
