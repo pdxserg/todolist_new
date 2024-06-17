@@ -8,13 +8,7 @@ import {FilterValue, TodolistType} from "../App";
 		todolistId: string
 	}
 }
-// export type addTodoListType={
-// 	type:"ADD-TODOLIST"
-// 	payload:{
-// 		id:string
-// 		title:string
-// 	}
-// }
+
 export type ChangeTitleTodolistType={
 	type:"CHANGE-TITLE",
 	payload:{
