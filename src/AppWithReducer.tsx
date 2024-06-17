@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {Reducer, useReducer} from 'react';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import './App.css';
@@ -7,14 +7,14 @@ import {
 	addTodoListAC,
 	changeFilterTodoListAC,
 	changeTitleTodoListAC,
-	removeTodolistAC,
+	removeTodolistAC, TodolistActionsType,
 	todolistsReducer
 } from "./modules/todolists-reducer";
 import {
 	addTaskAC,
 	changeTaskStatusAC,
 	changeTitleTaskAC,
-	removeTaskAC,
+	removeTaskAC, TaskActionsType,
 	tasksReducer
 } from "./modules/tasks-reducer";
 
@@ -35,16 +35,16 @@ export type TodolistType = {
 	filter: FilterValue
 }
 
-export const App = () => {
+export const AppWithReducer = () => {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 
-	let [todolists, dispatchTodolists] = useReducer(todolistsReducer, [
+	let [todolists, dispatchTodolists] = useReducer<Reducer<TodolistType[],  TodolistActionsType>>(todolistsReducer, [
 		{id: todolistID1, title: 'What to learn', filter: 'ALL'},
 		{id: todolistID2, title: 'What to buy', filter: 'ALL'},
 	])
 
-	let [tasks, dispatchTasks] = useReducer(tasksReducer, {
+	let [tasks, dispatchTasks] = useReducer<Reducer<TasksPropsType, TaskActionsType>>(tasksReducer, {
 		[todolistID1]: [
 			{id: v1(), title: 'HTML&CSS', isDone: true},
 			{id: v1(), title: 'JS', isDone: true},
@@ -76,18 +76,17 @@ export const App = () => {
 		dispatchTodolists(changeFilterTodoListAC(todolId, filter))
 	}
 	const removeTodolist = (todolId: string) => {
-		dispatchTodolists(removeTodolistAC(todolId))
-		delete tasks[todolId]
-		//????????? setTasks({...tasks})
-	// 	?????????????
+		let action = removeTodolistAC(todolId)
+		dispatchTodolists(action)
+		dispatchTasks(action)
+
+
 	}
 	const addTodolist = (title: string) => {
-		dispatchTodolists(addTodoListAC( title))
-		// const newTodolist: TodolistType = {id: newId, title: title, filter: 'ALL'}
-		// setTodolists([ newTodolist , ...todolists])
-		//                  dispatchTasks(addEmptyArray( ))
-		dispatchTasks(addTodoListAC( title))
-		// setTasks({...tasks, [newId]: []})
+		let action   = addTodoListAC( title)
+		dispatchTodolists(action)
+		dispatchTasks(action)
+
 
 	}
 

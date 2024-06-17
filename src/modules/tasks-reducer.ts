@@ -2,35 +2,6 @@ import {TasksPropsType} from "../App";
 import {v1} from "uuid";
 import {AddTodoListType, removeTodoListAction} from "./todolists-reducer";
 
-// type RemoveTaskType ={
-// 	type:"REMOVE-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		taskId: string
-// 	}
-// }
-// type AddTaskType ={
-// 	type:"ADD-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		title: string
-// 	}
-// }
-type AddEmptyArrayType = {
-	type: "ADD-EMPTY-ARRAY"
-	payload: {
-		newId: string,
-
-	}
-}
-// type ChangeTaskStatusType ={
-// 	type:"CHANGE-STATUS-TASK"
-// 	payload:{
-// 		todolId: string,
-// 		id: string,
-// 		isDone: boolean
-// 	}
-// }
 type ChangeTitleTaskType = {
 	type: "CHANGE-TITLE-TASK"
 	payload: {
@@ -40,15 +11,17 @@ type ChangeTitleTaskType = {
 	}
 }
 
-
-type ActionsType = RemoveTaskType
+export type TaskActionsType = RemoveTaskType
 	| AddTaskType
-	| AddEmptyArrayType
 	| ChangeTaskStatusType
 	| ChangeTitleTaskType
 	| AddTodoListType
 	| removeTodoListAction
-export const tasksReducer = (state: TasksPropsType, action: ActionsType): TasksPropsType => {
+
+const initialState: TasksPropsType = {}
+
+export const tasksReducer = (state  = initialState, action: TaskActionsType): TasksPropsType => {
+
 	switch (action.type) {
 		case"REMOVE-TASK": {
 			return {
@@ -59,9 +32,6 @@ export const tasksReducer = (state: TasksPropsType, action: ActionsType): TasksP
 		case"ADD-TASK": {
 			const newTask = {id: v1(), title: action.title, isDone: false}
 			return {...state, [action.todolId]: [newTask, ...state[action.todolId]]}
-		}
-		case "ADD-EMPTY-ARRAY": {
-			return {...state, [action.payload.newId]: []}
 		}
 		case "CHANGE-STATUS-TASK": {
 			return {
@@ -78,11 +48,14 @@ export const tasksReducer = (state: TasksPropsType, action: ActionsType): TasksP
 			}
 		}
 		case "ADD-TODOLIST": {
+
 			return {...state, [action.id]: []}
+
 		}
 		case "REMOVE-TODOLIST":{
-			 delete state[action.payload.todolistId]
-			return  {...state}
+			const copy = {...state}
+			 delete copy[action.payload.todolistId]
+			return  {...copy}
 		}
 		default: {
 			return state
@@ -105,14 +78,6 @@ export const addTaskAC = (todolId: string, title: string) => {
 		type: "ADD-TASK",
 		todolId,
 		title
-	} as const
-}
-export const addEmptyArray = (newId: string): AddEmptyArrayType => {
-	return {
-		type: "ADD-EMPTY-ARRAY",
-		payload: {
-			newId
-		}
 	} as const
 }
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>

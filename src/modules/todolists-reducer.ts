@@ -8,13 +8,7 @@ import {FilterValue, TodolistType} from "../App";
 		todolistId: string
 	}
 }
-// export type addTodoListType={
-// 	type:"ADD-TODOLIST"
-// 	payload:{
-// 		id:string
-// 		title:string
-// 	}
-// }
+
 export type ChangeTitleTodolistType={
 	type:"CHANGE-TITLE",
 	payload:{
@@ -30,14 +24,14 @@ export type ChangeFilterTodolistType={
 	}
 }
 
- type ActionsType = removeTodoListAction
+ export type TodolistActionsType = removeTodoListAction
 	 | AddTodoListType
 	 | ChangeTitleTodolistType
 	 | ChangeFilterTodolistType
 
 
-
-export const todolistsReducer=(state:TodolistType[], action:ActionsType ):TodolistType[]=>{
+const initialState: TodolistType[]= []
+export const todolistsReducer=(state =initialState, action:TodolistActionsType ):TodolistType[]=>{
 	switch (action.type){
 		case "REMOVE-TODOLIST":{
 			return state.filter(i=>i.id !== action.payload.todolistId )
