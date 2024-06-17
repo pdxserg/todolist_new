@@ -19,6 +19,7 @@ import {
 } from "./modules/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./modules/store";
+import {TodolistWithRedux} from "./TodolistRedux";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
@@ -43,10 +44,10 @@ export const AppWithRedux = () => {
 
 	let todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists)
 
-	let tasks = useSelector<AppRootStateType,TasksPropsType >(state => state.tasks)
+	// let tasks = useSelector<AppRootStateType,TasksPropsType >(state => state.tasks)
 const dispatch = useDispatch()
-	console.log(todolists)
-	console.log(tasks)
+	// console.log(todolists)
+	// console.log(tasks)
 	const removeTask = (todolId: string, taskId: string) => {
 		dispatch (removeTaskAC(todolId, taskId))
 		// setTasks({...tasks, [todolId]: tasks[todolId].filter(t => t.id !== taskId)})
@@ -91,28 +92,12 @@ const dispatch = useDispatch()
 			{todolists.length === 0
 				? <h2>NOTHIN</h2>
 				: todolists.map((tl) => {
-					let tasksForTodolist = tasks[tl.id]
-					if (tl.filter === "ACTIVE") {
-						tasksForTodolist = tasks[tl.id].filter(f => f.isDone === true)
-					}
-					if (tl.filter === "COMPLITED") {
-						tasksForTodolist = tasks[tl.id].filter(f => f.isDone === false)
-					}
+					// let tasksForTodolist = tasks[tl.id]
 
 
-					return <Todolist
+					return <TodolistWithRedux
 						key={tl.id}
-						todolId={tl.id}
-						title={tl.title}
-						tasks={tasksForTodolist}
-						removeTask={removeTask}
-						filterTasks={filterTasks}
-						addTask={addTask}
-						changeStatus={changeStatus}
-						filter={tl.filter}
-						removeTodolist={removeTodolist}
-						changeTitleTodolist={changeTitleTodolist}
-						changeTitleTask={changeTitleTask}
+						todolist={tl}
 					/>
 				})}
 

@@ -4,57 +4,38 @@ import {Button} from "./Button";
 import './App.css';
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./modules/store";
+import {TodolistType} from "./AppWithRedux";
+import {addTaskAC, changeTaskStatusAC, changeTitleTaskAC, removeTaskAC} from "./modules/tasks-reducer";
+import {changeFilterTodoListAC, changeTitleTodoListAC, removeTodolistAC} from "./modules/todolists-reducer";
 
 
-type TodolistPropsType = {
-	title: string
-	tasks: Array<TaskPropseType>
-	removeTask: (todolId: string, taskId: string) => void
-	filterTasks: (todolId: string, filter: FilterValue) => void
-	addTask: (todolId: string, title: string) => void
-	changeStatus: (todolId: string, id: string, isDone: boolean) => void
-	filter: FilterValue
-	todolId: string
-	removeTodolist: (todolId: string) => void
-	changeTitleTodolist: (todolId: string, newTitle: string) => void
-	changeTitleTask: (todolId: string, taskId: string, newTitle: string) => void
-
+type PropsType = {
+	todolist: TodolistType
 }
-export const Todolist = ({
-	                         title,
-	                         tasks,
-	                         removeTask,
-	                         addTask,
-	                         changeStatus,
-	                         filter,
-	                         filterTasks,
-	                         todolId,
-	                         removeTodolist,
-	                         changeTitleTodolist,
-	                         changeTitleTask
-                         }: TodolistPropsType) => {
-
-
-	// const [filter, setFilter] = useState<FilterValue>("ALL")
-	// if (filter === "ACTIVE") {
-	// 	tasks = tasks.filter(f => f.isDone === true)
-	// }
-	// if (filter === "COMPLITED") {
-	// 	tasks = tasks.filter(f => f.isDone === false)
-	// }
-	// const filterTasks = (filter: FilterValue) => {
-	// 	setFilter(filter)
-	// }
+export const TodolistWithRedux = ({todolist}: PropsType) => {
+	// const todolist = useSelector<AppRootStateType, TodolistType>(state =>state.todolists.filter(t =>t.id === todolId)[0])
+	const {id, title, filter} = todolist
+	let tasks = useSelector<AppRootStateType, TaskPropseType[]>(state => state.tasks[id])
+const dispatch = useDispatch()
 	const addTaskCallback = (title: string) => {
-		addTask(todolId, title)
+		dispatch(addTaskAC(id, title))
 	}
 	const callBackHandler = (title: string) => {
-		changeTitleTodolist(todolId, title)
+		dispatch(changeTitleTodoListAC(id, title))
+	}
+
+	if (filter === "ACTIVE") {
+		tasks = tasks.filter(f => f.isDone === true)
+	}
+	if (filter === "COMPLITED") {
+		tasks = tasks.filter(f => f.isDone === false)
 	}
 
 	return (
 		<div className={'todolist'}>
-			<button onClick={() => removeTodolist(todolId)}
+			<button onClick={() => dispatch(removeTodolistAC(id))}
 			        className={"remove-todolist-button"}>x
 			</button>
 			<h1>
@@ -72,10 +53,10 @@ export const Todolist = ({
 					? <p> Nothing here </p>
 					: tasks.map(task => {
 						const changeTaskStatusHendler = (e: ChangeEvent<HTMLInputElement>) => {
-							changeStatus(todolId, task.id, e.currentTarget.checked)
+							dispatch(changeTaskStatusAC(id, task.id, e.currentTarget.checked))
 						}
-						const callBackTaskHandler = ( newTitle:string) => {
-							changeTitleTask(todolId , task.id, newTitle)
+						const callBackTaskHandler = (newTitle: string) => {
+							dispatch(changeTitleTaskAC(id, task.id, newTitle))
 						}
 
 						return <li key={task.id}
@@ -83,7 +64,7 @@ export const Todolist = ({
 							<input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHendler}/>
 							<EditableSpan title={task.title} callBack={callBackTaskHandler}/>
 							{/*<span> {task.title} </span>*/}
-							<Button onClick={() => removeTask(todolId, task.id)} title={"X"}/>
+							<Button onClick={() => dispatch(removeTaskAC(id, task.id))} title={"X"}/>
 
 						</li>
 					})
@@ -93,13 +74,13 @@ export const Todolist = ({
 			</ul>
 			<div className={"foter-buttons"}>
 				<Button title={"All"}
-				        onClick={() => filterTasks(todolId, "ALL")}
+				        onClick={() => dispatch(changeFilterTodoListAC(id, "ALL"))}
 				        className={filter === "ALL" ? 'active-filter' : ""}/>
 				<Button title={"Active"}
-				        onClick={() => filterTasks(todolId, "ACTIVE")}
+				        onClick={() => dispatch(changeFilterTodoListAC(id, "ACTIVE"))}
 				        className={filter === "ACTIVE" ? 'active-filter' : ""}/>
 				<Button title={"Completed"}
-				        onClick={() => filterTasks(todolId, "COMPLITED")}
+				        onClick={() => dispatch(changeFilterTodoListAC(id, "COMPLITED"))}
 				        className={filter === "COMPLITED" ? 'active-filter' : ""}/>
 			</div>
 
