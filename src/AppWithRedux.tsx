@@ -1,5 +1,4 @@
-import React, {Reducer, useReducer} from 'react';
-import {Todolist} from "./Todolist";
+import React from 'react';
 import {v1} from "uuid";
 import './App.css';
 import {AddItemForm} from "./components/AddItemForm";
@@ -7,19 +6,18 @@ import {
 	addTodoListAC,
 	changeFilterTodoListAC,
 	changeTitleTodoListAC,
-	removeTodolistAC, TodolistActionsType,
-	todolistsReducer
+	removeTodolistAC,
+
 } from "./modules/todolists-reducer";
 import {
 	addTaskAC,
 	changeTaskStatusAC,
 	changeTitleTaskAC,
-	removeTaskAC, TaskActionsType,
-	tasksReducer
+	removeTaskAC,
 } from "./modules/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./modules/store";
 import {TodolistWithRedux} from "./TodolistRedux";
+import {todolistkSelector} from "./modules/selectors";
 
 export type FilterValue = "ALL" | "ACTIVE" | "COMPLITED"
 
@@ -42,7 +40,7 @@ export const AppWithRedux = () => {
 	let todolistID1 = v1()
 	let todolistID2 = v1()
 
-	let todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists)
+	let todolists = useSelector ( todolistkSelector)
 
 	// let tasks = useSelector<AppRootStateType,TasksPropsType >(state => state.tasks)
 const dispatch = useDispatch()
