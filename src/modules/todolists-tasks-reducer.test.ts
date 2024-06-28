@@ -17,6 +17,9 @@ test('ids should be equals', () => {
 
 	expect(idFromTasks).toBe(action.id)
 	expect(idFromTodolists).toBe(action.id)
+	expect(idFromTodolists).toEqual(idFromTasks)
+	expect(endTodolistsState.length).toBe(1)
+	expect(endTasksState[idFromTodolists]).toEqual([])
 })
 
 

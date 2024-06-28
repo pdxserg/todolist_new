@@ -56,11 +56,11 @@ export const AppWithReducer = () => {
 		],
 	})
 
-	console.log(todolists)
-	console.log(tasks)
+	console.log('todolist:',todolists)
+	console.log("tasks:",tasks)
 	const removeTask = (todolId: string, taskId: string) => {
 		dispatchTasks(removeTaskAC(todolId, taskId))
-		// setTasks({...tasks, [todolId]: tasks[todolId].filter(t => t.id !== taskId)})
+
 	}
 	const addTask = (todolId: string, title: string) => {
 		// const newTask = {id: v1(), title: title, isDone: false}
@@ -83,11 +83,12 @@ export const AppWithReducer = () => {
 
 	}
 	const addTodolist = (title: string) => {
-		let action   = addTodoListAC( title)
+
+		console.log(title)
+		let id = v1()
+		let action   = addTodoListAC(title)
 		dispatchTodolists(action)
 		dispatchTasks(action)
-
-
 	}
 
 	const changeTitleTodolist = (todolId: string, newTitle: string) => {
