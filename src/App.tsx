@@ -82,11 +82,13 @@ export const App = () => {
 	// 	?????????????
 	}
 	const addTodolist = (title: string) => {
-		dispatchTodolists(addTodoListAC( title))
+
+		const action  =addTodoListAC( title)
+		dispatchTodolists(action)
 		// const newTodolist: TodolistType = {id: newId, title: title, filter: 'ALL'}
 		// setTodolists([ newTodolist , ...todolists])
 		//                  dispatchTasks(addEmptyArray( ))
-		dispatchTasks(addTodoListAC( title))
+		dispatchTasks(action)
 		// setTasks({...tasks, [newId]: []})
 
 	}
